@@ -1,0 +1,23 @@
+{
+  "name": "my-tog-api",
+  "version": "0.0.0",
+  "description": "API for MyTog application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Sergiy Kalinkin",
+  "license": "ISC",
+  "dependencies": {
+    "awilix": "^4.2.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.4",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "express-jwt-authz": "^2.3.1",
+    "jwks-rsa": "^1.6.2",
+    "morgan": "^1.9.1"
+  }
+}

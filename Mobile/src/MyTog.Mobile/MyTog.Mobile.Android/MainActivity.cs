@@ -8,6 +8,7 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using Kalinkin.MyTog.Mobile;
+using Kalinkin.MyTog.Mobile.Autofac;
 
 namespace MyTog.Mobile.Droid
 {
@@ -30,9 +31,9 @@ namespace MyTog.Mobile.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            var bootstrapper = new TinyIoCBootstrapper();
-            var androidBootstrapper = new TinyIoCBootstrapperAndroid();
-            androidBootstrapper.Initialize();
+
+            
+            var bootstrapper = new AutofacBootstrapper();
             bootstrapper.Initialize();
 
             var application = bootstrapper.GetApplication();

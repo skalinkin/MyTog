@@ -2,9 +2,8 @@
 using Autofac;
 using Autofac.Core;
 using Kalinkin.MyTog.Mobile;
-using MyTog.Mobile.Droid;
 
-namespace MyTog.Mobile.Android.Autofac
+namespace MyTog.Mobile.Droid.Autofac
 {
     [Export(typeof(IModule))]
     internal class AndroidModule : Module

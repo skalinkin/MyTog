@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.1</TargetFramework>
+    <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -10,7 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\MyTog.Mobile\MyTog.Mobile.Android\MyTog.Mobile.Android.csproj" />
     <ProjectReference Include="..\src\MyTog.Mobile\MyTog.Mobile\MyTog.Mobile.csproj" />
   </ItemGroup>
 

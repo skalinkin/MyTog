@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Foundation;
+using Kalinkin.MyTog.Mobile.Autofac;
 using UIKit;
 
 namespace MyTog.Mobile.iOS
@@ -23,7 +24,11 @@ namespace MyTog.Mobile.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            LoadApplication(new App());
+            var bootstrapper = new AutofacBootstrapper();
+            bootstrapper.Initialize();
+
+            var application = bootstrapper.GetApplication();
+            LoadApplication(application);
 
             return base.FinishedLaunching(app, options);
         }

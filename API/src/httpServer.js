@@ -7,8 +7,9 @@ module.exports.createServer = function(){
     const server = http.createServer(app)    
     return {
         run() {
-            server.listen(3000)
-            console.log('Server started.')
+            var port = 3000;
+            server.listen(port)
+            console.log('Server started at http://localhost:' + port)
         },
         stop() {
             server.close()

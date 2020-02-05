@@ -4,7 +4,7 @@ using Kalinkin.MyTog.Mobile;
 
 namespace MyTog.Mobile.Droid
 {
-    internal class Auth0AuthenticationService : IAuthenticationService
+    public class Auth0AuthenticationService : IAuthenticationService
     {
         private readonly MyTogDatabase _database;
 

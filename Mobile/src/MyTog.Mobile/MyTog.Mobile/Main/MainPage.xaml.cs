@@ -2,15 +2,21 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.Main
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : MasterDetailPage
     {
-        public MainPage()
+        private readonly MainPageMaster _Master;
+
+        public MainPage(MainPageMaster master, MainPageDetail detail)
         {
+            _Master = master;
             InitializeComponent();
-            MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+        
+            Master = master;
+            Detail = new NavigationPage(detail);
+            master.ListView.ItemSelected += ListView_ItemSelected;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -25,7 +31,7 @@ namespace Kalinkin.MyTog.Mobile
             Detail = new NavigationPage(page);
             IsPresented = false;
 
-            MasterPage.ListView.SelectedItem = null;
+            _Master.ListView.SelectedItem = null;
         }
     }
 }

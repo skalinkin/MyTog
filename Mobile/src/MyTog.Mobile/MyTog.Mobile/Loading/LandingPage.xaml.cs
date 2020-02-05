@@ -12,16 +12,17 @@ namespace Kalinkin.MyTog.Mobile
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LandingPage : ContentPage
     {
-        public LandingPage()
+        private readonly IAuthenticationService _Auth;
+
+        public LandingPage(IAuthenticationService auth)
         {
+            _Auth = auth;
             InitializeComponent();
-            
         }
 
         protected override void OnAppearing()
         {
-            var service = TinyIoC.TinyIoCContainer.Current.Resolve<IAuthenticationService>();
-            service.AuthenticateAsync();
+            _Auth.AuthenticateAsync();
         }
     }
 }

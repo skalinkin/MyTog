@@ -5,16 +5,6 @@
                   xmlns:d="http://xamarin.com/schemas/2014/forms/design"
                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                   mc:Ignorable="d"
-                  x:Class="Kalinkin.MyTog.Mobile.MainPage"
+                  x:Class="Kalinkin.MyTog.Mobile.Main.MainPage"
                   xmlns:pages="clr-namespace:Kalinkin.MyTog.Mobile">
-    <MasterDetailPage.Master>
-        <pages:MainPageMaster x:Name="MasterPage" />
-    </MasterDetailPage.Master>
-    <MasterDetailPage.Detail>
-        <NavigationPage>
-            <x:Arguments>
-                <pages:LandingPage />
-            </x:Arguments>
-        </NavigationPage>
-    </MasterDetailPage.Detail>
 </MasterDetailPage>

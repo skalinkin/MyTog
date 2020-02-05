@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Reflection;
@@ -15,7 +16,8 @@ namespace Kalinkin.MyTog.Mobile.Autofac
 
         public void Initialize()
         {
-            var directoryCatalog = new DirectoryCatalog("*.dll");
+            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
+            var directoryCatalog = new DirectoryCatalog(basePath,"*.dll");
             var assemblyCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
             var aggregateCatalog = new AggregateCatalog(assemblyCatalog, directoryCatalog);
             aggregateCatalog.Catalogs.Add(directoryCatalog);

@@ -7,6 +7,8 @@ namespace Kalinkin.MyTog.Mobile
     {
         public void Initialize()
         {
+            TinyIoC.TinyIoCContainer.Current.Register<Page, MainPage>();
+            TinyIoC.TinyIoCContainer.Current.Register<MyTogDatabase>().AsSingleton();
             TinyIoC.TinyIoCContainer.Current.Register<Application, App>();
         }
         public Application GetApplication()

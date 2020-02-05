@@ -1,6 +1,6 @@
 ﻿using Xamarin.Forms;
 
-namespace MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile
 {
     public partial class App : Application
     {

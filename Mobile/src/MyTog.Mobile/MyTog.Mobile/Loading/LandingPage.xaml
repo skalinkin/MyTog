@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Kalinkin.MyTog.Mobile.LandingPage">
+             x:Class="Kalinkin.MyTog.Mobile.Loading.LandingPage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Landing Page!"

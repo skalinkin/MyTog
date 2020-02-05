@@ -1,5 +1,5 @@
 ﻿using Kalinkin.MyTog.Mobile.Main;
-using MyTog.Mobile;
+using Kalinkin.MyTog.Mobile.SQLiteModule;
 using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile

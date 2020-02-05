@@ -1,6 +1,6 @@
 ﻿using SQLite;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.SQLiteModule
 {
     public class LoginResult
     {

@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using SQLite;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.SQLiteModule
 {
     public class MyTogDatabase
     {
-        static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
+        private static readonly Lazy<SQLiteAsyncConnection> lazyInitializer = new Lazy<SQLiteAsyncConnection>(() =>
         {
             return new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags);
         });
 
-        static SQLiteAsyncConnection Database => lazyInitializer.Value;
-        static bool initialized = false;
+        private static bool initialized;
 
         public MyTogDatabase()
         {
             InitializeAsync().SafeFireAndForget(false);
         }
 
-        async Task InitializeAsync()
+        private static SQLiteAsyncConnection Database => lazyInitializer.Value;
+
+        private async Task InitializeAsync()
         {
             if (!initialized)
-            {
                 if (Database.TableMappings.All(m => m.MappedType.Name != typeof(LoginResult).Name))
                 {
                     await Database.CreateTablesAsync(CreateFlags.None, typeof(LoginResult)).ConfigureAwait(false);
                     initialized = true;
                 }
-            }
         }
 
         public Task<List<LoginResult>> GetItemsAsync()
@@ -52,13 +50,8 @@ namespace Kalinkin.MyTog.Mobile
         public Task<int> SaveItemAsync(LoginResult item)
         {
             if (item.ID != 0)
-            {
                 return Database.UpdateAsync(item);
-            }
-            else
-            {
-                return Database.InsertAsync(item);
-            }
+            return Database.InsertAsync(item);
         }
 
         public Task<int> DeleteItemAsync(LoginResult item)

@@ -74,12 +74,12 @@
     <PackageReference Include="Xamarin.Essentials" Version="1.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Auth0AuthenticationService.cs" />
+    <Compile Include="Auth0Component\Auth0AuthenticationService.cs" />
+    <Compile Include="Auth0Component\Auth0Module.cs" />
     <Compile Include="Autofac\AndroidModule.cs" />
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TinyIoCBootstrapperAndroid.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

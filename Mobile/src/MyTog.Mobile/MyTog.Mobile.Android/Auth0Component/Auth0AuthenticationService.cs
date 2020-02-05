@@ -1,8 +1,9 @@
 ﻿using System.Diagnostics;
 using Auth0.OidcClient;
 using Kalinkin.MyTog.Mobile;
+using Kalinkin.MyTog.Mobile.SQLiteModule;
 
-namespace MyTog.Mobile.Droid
+namespace MyTog.Mobile.Droid.Auth0Component
 {
     public class Auth0AuthenticationService : IAuthenticationService
     {
@@ -43,9 +44,10 @@ namespace MyTog.Mobile.Droid
                     foreach (var claim in loginResult.User.Claims)
                         Debug.WriteLine($"{claim.Type} = {claim.Value}");
 
-                var loginResultRecord = new LoginResult();
-                loginResultRecord.AccessToken = loginResult.AccessToken;
-                loginResultRecord.IdentityToken = loginResult.IdentityToken;
+                var loginResultRecord = new LoginResult
+                {
+                    AccessToken = loginResult.AccessToken, IdentityToken = loginResult.IdentityToken
+                };
                 await _database.SaveItemAsync(loginResultRecord);
             }
         }

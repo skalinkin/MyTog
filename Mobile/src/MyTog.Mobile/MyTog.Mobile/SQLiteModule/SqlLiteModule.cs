@@ -1,10 +1,8 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
-using MyTog.Mobile;
-using Xamarin.Forms;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.SQLiteModule
 {
     [Export(typeof(IModule))]
     internal class SqlLiteModule : Module

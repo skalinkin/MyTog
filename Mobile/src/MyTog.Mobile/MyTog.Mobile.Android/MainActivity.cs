@@ -1,25 +1,26 @@
-﻿using System;
-
-using Android.App;
+﻿using Android.App;
 using Android.Content;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using Kalinkin.MyTog.Mobile;
+using Android.Runtime;
+using Auth0.OidcClient;
 using Kalinkin.MyTog.Mobile.Autofac;
+using Xamarin.Forms;
+using Xamarin.Forms.Platform.Android;
+using Platform = Xamarin.Essentials.Platform;
 
 namespace MyTog.Mobile.Droid
 {
-    [Activity(Label = "MyTog.Mobile", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTask, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "MyTog.Mobile", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true,
+        LaunchMode = LaunchMode.SingleTask,
+        ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(
-        new[] { Android.Content.Intent.ActionView },
-        Categories = new[] { Android.Content.Intent.CategoryDefault, Android.Content.Intent.CategoryBrowsable },
+        new[] {Intent.ActionView},
+        Categories = new[] {Intent.CategoryDefault, Intent.CategoryBrowsable},
         DataScheme = "com.kalinkin.mytog.mobile",
         DataHost = "mytog.auth0.com",
         DataPathPrefix = "/android/com.kalinkin.mytog.mobile/callback")]
-    public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
+    public class MainActivity : FormsAppCompatActivity
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
@@ -28,20 +29,21 @@ namespace MyTog.Mobile.Droid
 
             base.OnCreate(savedInstanceState);
 
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Platform.Init(this, savedInstanceState);
+            Forms.Init(this, savedInstanceState);
 
 
-            
             var bootstrapper = new AutofacBootstrapper();
             bootstrapper.Initialize();
 
             var application = bootstrapper.GetApplication();
             LoadApplication(application);
         }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+
+        public override void OnRequestPermissionsResult(int requestCode, string[] permissions,
+            [GeneratedEnum] Permission[] grantResults)
         {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
         }
@@ -49,7 +51,7 @@ namespace MyTog.Mobile.Droid
         protected override void OnNewIntent(Intent intent)
         {
             base.OnNewIntent(intent);
-            Auth0.OidcClient.ActivityMediator.Instance.Send(intent.DataString);
+            ActivityMediator.Instance.Send(intent.DataString);
         }
     }
 }

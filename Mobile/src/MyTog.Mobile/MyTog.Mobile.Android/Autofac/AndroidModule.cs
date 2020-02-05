@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Core;
 using Kalinkin.MyTog.Mobile;
+using MyTog.Mobile.Droid.Auth0Component;
 
 namespace MyTog.Mobile.Droid.Autofac
 {

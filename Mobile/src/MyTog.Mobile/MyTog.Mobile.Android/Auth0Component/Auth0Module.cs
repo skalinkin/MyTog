@@ -1,16 +1,16 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
-using Xamarin.Forms;
+using Kalinkin.MyTog.Mobile;
 
-namespace Kalinkin.MyTog.Mobile
+namespace MyTog.Mobile.Droid.Auth0Component
 {
     [Export(typeof(IModule))]
-    internal class MyTogModule : Module
+    internal class Auth0Module : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<App>().As<Application>();
+            builder.RegisterType<Auth0AuthenticationService>().As<IAuthenticationService>();
         }
     }
 }

@@ -5389,13 +5389,16 @@ namespace MyTog.Mobile.Droid
 		{
 			
 			// aapt resource value: 0x7F0B0000
-			public const int icon = 2131427328;
+			public const int cameraicon = 2131427328;
 			
 			// aapt resource value: 0x7F0B0001
-			public const int icon_round = 2131427329;
+			public const int icon = 2131427329;
 			
 			// aapt resource value: 0x7F0B0002
-			public const int launcher_foreground = 2131427330;
+			public const int icon_round = 2131427330;
+			
+			// aapt resource value: 0x7F0B0003
+			public const int launcher_foreground = 2131427331;
 			
 			static Mipmap()
 			{

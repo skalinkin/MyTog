@@ -1,22 +1,14 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.Main
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPageDetail : ContentPage
     {
-        private readonly IAuthenticationService _Auth;
-
-        public MainPageDetail(IAuthenticationService auth)
+        public MainPageDetail()
         {
-            _Auth = auth;
             InitializeComponent();
-        }
-
-        protected override void OnAppearing()
-        {
-            _Auth.AuthenticateAsync();
         }
     }
 }

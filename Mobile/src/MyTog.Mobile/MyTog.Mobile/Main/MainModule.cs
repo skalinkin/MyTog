@@ -11,6 +11,7 @@ namespace Kalinkin.MyTog.Mobile.Main
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<MainPage>().As<Page>();
+            builder.RegisterType<MainPageMasterViewModel>();
             builder.RegisterType<MainPageMaster>();
             builder.RegisterType<MainPageDetail>();
         }

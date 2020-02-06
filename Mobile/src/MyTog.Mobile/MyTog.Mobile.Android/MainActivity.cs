@@ -12,7 +12,7 @@ using Platform = Xamarin.Essentials.Platform;
 
 namespace MyTog.Mobile.Droid
 {
-    [Activity(Label = "MyTog.Mobile", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true,
+    [Activity(Label = "My Tog", Icon = "@mipmap/cameraicon", Theme = "@style/MainTheme", MainLauncher = true,
         LaunchMode = LaunchMode.SingleTask,
         ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     [IntentFilter(

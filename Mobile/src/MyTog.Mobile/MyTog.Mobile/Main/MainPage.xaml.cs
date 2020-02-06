@@ -21,7 +21,7 @@ namespace Kalinkin.MyTog.Mobile.Main
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as MainPageMasterMenuItem;
+            var item = e.SelectedItem as IMenuItem;
             if (item == null)
                 return;
 

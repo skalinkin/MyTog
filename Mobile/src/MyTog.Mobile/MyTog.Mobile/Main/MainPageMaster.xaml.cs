@@ -1,56 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.Main
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPageMaster : ContentPage
     {
         public ListView ListView;
 
-        public MainPageMaster()
+        public MainPageMaster(MainPageMasterViewModel viewModel)
         {
             InitializeComponent();
 
-            BindingContext = new MainPageMasterViewModel();
+            BindingContext = viewModel;
             ListView = MenuItemsListView;
-        }
-
-        class MainPageMasterViewModel : INotifyPropertyChanged
-        {
-            public ObservableCollection<MainPageMasterMenuItem> MenuItems { get; set; }
-
-            public MainPageMasterViewModel()
-            {
-                MenuItems = new ObservableCollection<MainPageMasterMenuItem>(new[]
-                {
-                    new MainPageMasterMenuItem { Id = 0, Title = "Schedule" },
-                    new MainPageMasterMenuItem { Id = 1, Title = "Page 2" },
-                    new MainPageMasterMenuItem { Id = 2, Title = "Page 3" },
-                    new MainPageMasterMenuItem { Id = 3, Title = "Customers" },
-                    new MainPageMasterMenuItem { Id = 4, Title = "Help" },
-                });
-            }
-
-            #region INotifyPropertyChanged Implementation
-            public event PropertyChangedEventHandler PropertyChanged;
-            void OnPropertyChanged([CallerMemberName] string propertyName = "")
-            {
-                if (PropertyChanged == null)
-                    return;
-
-                PropertyChanged.Invoke(this, new PropertyChangedEventArgs(propertyName));
-            }
-            #endregion
         }
     }
 }

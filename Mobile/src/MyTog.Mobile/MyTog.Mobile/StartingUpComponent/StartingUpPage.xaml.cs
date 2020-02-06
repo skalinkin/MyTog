@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using Kalinkin.MyTog.Mobile.StartingUpComponent;
+using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace Kalinkin.MyTog.Mobile

@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
+using Kalinkin.MyTog.Mobile.StartingUpComponent;
 using TinyMessenger;
 using Xamarin.Forms;
 

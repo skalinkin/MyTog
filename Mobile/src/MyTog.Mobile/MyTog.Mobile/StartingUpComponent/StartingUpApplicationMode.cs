@@ -1,8 +1,9 @@
 ﻿using System;
+using MyTog.Mobile.Droid.Auth0Component;
 using TinyMessenger;
 using Xamarin.Forms;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.StartingUpComponent
 {
     internal class StartingUpApplicationMode : IApplicationMode
     {
@@ -22,17 +23,25 @@ namespace Kalinkin.MyTog.Mobile
             _createDefaultApplicationMode = createDefaultApplicationMode;
 
             _messenger.Subscribe<StartUpCompleted>(OnStartUpCompleted);
+            _messenger.Subscribe<AuthenticationSuccessful>(OnAuthenticationSuccessful);
+        }
+
+        private void OnAuthenticationSuccessful(AuthenticationSuccessful obj)
+        {
+            _messenger.Publish(new StartUpStatus {Sender = this, StatusText = "Loading the application."});
+            var mode = _createDefaultApplicationMode();
+            Device.BeginInvokeOnMainThread(() => _application.TransitionTo(mode));
         }
 
         public void SetApplication(App application)
         {
             _application = application;
             _application.MainPage = _pageFactory();
+            _authentication.AuthenticateAsync();
         }
 
         public void HandleOnStart()
         {
-            _authentication.AuthenticateAsync();
         }
 
         public void HandleOnResume()
@@ -45,9 +54,6 @@ namespace Kalinkin.MyTog.Mobile
 
         private void OnStartUpCompleted(StartUpCompleted obj)
         {
-            var mode = _createDefaultApplicationMode();
-
-            Device.BeginInvokeOnMainThread(() => _application.TransitionTo(mode));
         }
     }
 }

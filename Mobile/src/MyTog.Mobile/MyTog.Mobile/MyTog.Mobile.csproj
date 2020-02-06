@@ -47,7 +47,7 @@
     <EmbeddedResource Update="Main\MainPageMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="StartingUpPage.xaml">
+    <EmbeddedResource Update="StartingUpComponent\StartingUpPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
@@ -56,7 +56,7 @@
     <Compile Update="AccountComponent\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="StartingUpPage.xaml.cs">
+    <Compile Update="StartingUpComponent\StartingUpPage.xaml.cs">
       <DependentUpon>StartingUpPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>

@@ -3,6 +3,5 @@
     public interface IAuthenticationService
     {
         void AuthenticateAsync();
-        void Validate();
     }
 }

@@ -2,20 +2,24 @@
 using Auth0.OidcClient;
 using Kalinkin.MyTog.Mobile;
 using Kalinkin.MyTog.Mobile.SQLiteComponent;
+using TinyMessenger;
 
 namespace MyTog.Mobile.Droid.Auth0Component
 {
     public class Auth0AuthenticationService : IAuthenticationService
     {
         private readonly MyTogDatabase _database;
+        private readonly ITinyMessengerHub _messenger;
 
-        public Auth0AuthenticationService(MyTogDatabase database)
+        public Auth0AuthenticationService(MyTogDatabase database, ITinyMessengerHub messenger)
         {
             _database = database;
+            _messenger = messenger;
         }
 
         public async void AuthenticateAsync()
         {
+            _messenger.Publish(new StartUpStatus {Sender = this, StatusText = "Authenticating..."});
             var records = await _database.GetItemsAsync();
 
             if (records.Count == 0)
@@ -26,35 +30,31 @@ namespace MyTog.Mobile.Droid.Auth0Component
                     ClientId = "yKKtP1bkVMtbVXO9dO2y63ShQBirl5ZN"
                 });
                 var loginResult = await client.LoginAsync();
-                if (loginResult.IsError) Debug.Print($"An error occurred during login: {loginResult.Error}");
-
-                if (!loginResult.IsError)
+                if (loginResult.IsError)
                 {
+                    Debug.Print($"An error occurred during login: {loginResult.Error}");
+                }
+                else
+                {
+                    _messenger.Publish(new StartUpStatus {Sender = this, StatusText = "User Authenticated."});
                     Debug.WriteLine($"id_token: {loginResult.IdentityToken}");
                     Debug.WriteLine($"access_token: {loginResult.AccessToken}");
-                }
-
-                if (!loginResult.IsError)
-                {
                     Debug.WriteLine($"name: {loginResult.User.FindFirst(c => c.Type == "name")?.Value}");
                     Debug.WriteLine($"email: {loginResult.User.FindFirst(c => c.Type == "email")?.Value}");
-                }
-
-                if (!loginResult.IsError)
                     foreach (var claim in loginResult.User.Claims)
+                    {
                         Debug.WriteLine($"{claim.Type} = {claim.Value}");
+                    }
 
-                var loginResultRecord = new LoginResult
-                {
-                    AccessToken = loginResult.AccessToken, IdentityToken = loginResult.IdentityToken
-                };
-                await _database.SaveItemAsync(loginResultRecord);
+                    var loginResultRecord = new LoginResult
+                    {
+                        AccessToken = loginResult.AccessToken, IdentityToken = loginResult.IdentityToken
+                    };
+                    await _database.SaveItemAsync(loginResultRecord);
+                }
             }
-        }
 
-        public void Validate()
-        {
-            
+            _messenger.Publish(new AuthenticationSuccessful());
         }
     }
 }

@@ -51,5 +51,10 @@ namespace MyTog.Mobile.Droid.Auth0Component
                 await _database.SaveItemAsync(loginResultRecord);
             }
         }
+
+        public void Validate()
+        {
+            
+        }
     }
 }

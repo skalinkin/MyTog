@@ -7,16 +7,9 @@ namespace Kalinkin.MyTog.Mobile.Main
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class MainPage : MasterDetailPage
     {
-        private readonly MainPageMaster _Master;
-
-        public MainPage(MainPageMaster master, MainPageDetail detail)
+        public MainPage()
         {
-            _Master = master;
             InitializeComponent();
-        
-            Master = master;
-            Detail = new NavigationPage(detail);
-            master.ListView.ItemSelected += ListView_ItemSelected;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -31,7 +24,6 @@ namespace Kalinkin.MyTog.Mobile.Main
             Detail = new NavigationPage(page);
             IsPresented = false;
 
-            _Master.ListView.SelectedItem = null;
         }
     }
 }

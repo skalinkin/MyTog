@@ -1,18 +1,16 @@
 ﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace Kalinkin.MyTog.Mobile.Main
+namespace Kalinkin.MyTog.Mobile
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MainPageMaster : ContentPage
+    public partial class StartingUpPage : ContentPage
     {
-        public ListView ListView;
-
-        public MainPageMaster(MainPageMasterViewModel viewModel)
+        public StartingUpPage(StartingUpViewModel viewModel)
         {
             InitializeComponent();
-
             BindingContext = viewModel;
+            viewModel.Start();
         }
     }
 }

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
-using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile.Main
 {
@@ -10,7 +9,7 @@ namespace Kalinkin.MyTog.Mobile.Main
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<MainPage>().As<Page>();
+            builder.RegisterType<MainPage>();
             builder.RegisterType<MainPageMasterViewModel>();
             builder.RegisterType<MainPageMaster>();
             builder.RegisterType<MainPageDetail>();

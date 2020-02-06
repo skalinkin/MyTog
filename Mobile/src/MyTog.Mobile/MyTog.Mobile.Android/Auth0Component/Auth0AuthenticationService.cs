@@ -1,7 +1,7 @@
 ﻿using System.Diagnostics;
 using Auth0.OidcClient;
 using Kalinkin.MyTog.Mobile;
-using Kalinkin.MyTog.Mobile.SQLiteModule;
+using Kalinkin.MyTog.Mobile.SQLiteComponent;
 
 namespace MyTog.Mobile.Droid.Auth0Component
 {

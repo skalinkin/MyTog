@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 
-namespace Kalinkin.MyTog.Mobile.SQLiteModule
+namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
     public static class TaskExtensions
     {

@@ -2,7 +2,7 @@
 using Autofac;
 using Autofac.Core;
 
-namespace Kalinkin.MyTog.Mobile.SQLiteModule
+namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
     [Export(typeof(IModule))]
     internal class SqlLiteModule : Module

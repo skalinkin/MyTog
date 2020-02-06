@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Kalinkin.MyTog.Mobile.SQLiteModule
+namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
     public static class Constants
     {

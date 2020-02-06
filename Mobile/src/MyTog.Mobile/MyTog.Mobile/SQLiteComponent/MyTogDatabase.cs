@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using SQLite;
 
-namespace Kalinkin.MyTog.Mobile.SQLiteModule
+namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
     public class MyTogDatabase
     {

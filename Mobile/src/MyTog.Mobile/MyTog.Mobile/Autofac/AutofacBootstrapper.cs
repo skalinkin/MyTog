@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.Composition;
 using System.ComponentModel.Composition.Hosting;
 using System.Reflection;
@@ -11,20 +10,27 @@ namespace Kalinkin.MyTog.Mobile.Autofac
 {
     public class AutofacBootstrapper
     {
+        private AggregateCatalog _aggregateCatalog = new AggregateCatalog();
         private IContainer _container;
+        private CompositionContainer _mefContainer;
         [ImportMany] public List<IModule> Modules { get; set; }
 
         public void Initialize()
         {
-            var basePath = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var directoryCatalog = new DirectoryCatalog(basePath,"*.dll");
             var assemblyCatalog = new AssemblyCatalog(Assembly.GetExecutingAssembly());
-            var aggregateCatalog = new AggregateCatalog(assemblyCatalog, directoryCatalog);
-            aggregateCatalog.Catalogs.Add(directoryCatalog);
+            _aggregateCatalog.Catalogs.Add(new AggregateCatalog(assemblyCatalog));
+            _mefContainer = new CompositionContainer(_aggregateCatalog);
+        }
 
-            var container = new CompositionContainer(aggregateCatalog);
+        public void AddAssembly(Assembly assembly)
+        {
+            var assemblyCatalog = new AssemblyCatalog(assembly);
+            _aggregateCatalog.Catalogs.Add(assemblyCatalog);
+        }
 
-            container.ComposeParts(this);
+        public void MakeContainer()
+        {
+            _mefContainer.ComposeParts(this);
             var builder = new ContainerBuilder();
             foreach (var module in Modules) builder.RegisterModule(module);
             _container = builder.Build();

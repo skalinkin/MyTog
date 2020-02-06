@@ -1,4 +1,5 @@
-﻿using Android.App;
+﻿using System.Reflection;
+using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
@@ -35,6 +36,8 @@ namespace MyTog.Mobile.Droid
 
             var bootstrapper = new AutofacBootstrapper();
             bootstrapper.Initialize();
+            bootstrapper.AddAssembly(Assembly.GetExecutingAssembly());
+            bootstrapper.MakeContainer();
 
             var application = bootstrapper.GetApplication();
             LoadApplication(application);

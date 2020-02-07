@@ -1,4 +1,6 @@
-﻿namespace Kalinkin.MyTog.Mobile
+﻿using Kalinkin.MyTog.Mobile.Domain;
+
+namespace Kalinkin.MyTog.Mobile
 {
     internal interface IUserQuery
     {

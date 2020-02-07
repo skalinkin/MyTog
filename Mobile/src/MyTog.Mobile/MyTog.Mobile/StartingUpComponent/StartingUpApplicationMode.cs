@@ -1,5 +1,5 @@
 ﻿using System;
-using MyTog.Mobile.Droid.Auth0Component;
+using Kalinkin.MyTog.Mobile.Domain;
 using TinyMessenger;
 using Xamarin.Forms;
 
@@ -7,14 +7,14 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
 {
     internal class StartingUpApplicationMode : IApplicationMode
     {
-        private readonly IAuthenticationService _authentication;
+        private readonly AuthenticationService _authentication;
         private readonly Func<DefaultApplicationMode> _createDefaultApplicationMode;
         private readonly Func<StartingUpPage> _pageFactory;
         private readonly ITinyMessengerHub _messenger;
 
         private App _application;
 
-        public StartingUpApplicationMode(Func<StartingUpPage> pageFactory, IAuthenticationService authentication,
+        public StartingUpApplicationMode(Func<StartingUpPage> pageFactory, AuthenticationService authentication,
             ITinyMessengerHub messenger, Func<DefaultApplicationMode> createDefaultApplicationMode)
         {
             _pageFactory = pageFactory;

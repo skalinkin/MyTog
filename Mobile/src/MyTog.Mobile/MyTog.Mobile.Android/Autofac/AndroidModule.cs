@@ -11,7 +11,7 @@ namespace MyTog.Mobile.Droid.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<Auth0AuthenticationService>().As<IAuthenticationService>();
+            builder.RegisterType<Auth0AuthenticationService>().As<AuthenticationService>();
         }
     }
 }

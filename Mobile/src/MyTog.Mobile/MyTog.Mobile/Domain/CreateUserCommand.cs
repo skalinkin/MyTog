@@ -1,4 +1,4 @@
-﻿namespace Kalinkin.MyTog.Mobile
+﻿namespace Kalinkin.MyTog.Mobile.Domain
 {
     internal class CreateUserCommand
     {

@@ -2,7 +2,7 @@
 
 namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
-    internal class Account
+    internal class AccountRecord
     {
         [PrimaryKey] [AutoIncrement] public int ID { get; set; }
 

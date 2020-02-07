@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Kalinkin.MyTog.Mobile.Annotations;
+using Kalinkin.MyTog.Mobile.Domain;
 using TinyMessenger;
 
 namespace Kalinkin.MyTog.Mobile.StartingUpComponent

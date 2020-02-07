@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using Kalinkin.MyTog.Mobile.Domain;
 using TinyMessenger;
 
 namespace Kalinkin.MyTog.Mobile.Main

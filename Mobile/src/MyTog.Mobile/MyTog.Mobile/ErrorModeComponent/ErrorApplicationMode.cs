@@ -6,9 +6,9 @@ namespace Kalinkin.MyTog.Mobile
     internal class ErrorApplicationMode : IApplicationMode
     {
         private readonly Func<MainPage> _mainPageFactory;
-        private readonly IAuthenticationService _authentication;
+        private readonly AuthenticationService _authentication;
 
-        public ErrorApplicationMode(Func<MainPage> mainPageFactory, IAuthenticationService authentication)
+        public ErrorApplicationMode(Func<MainPage> mainPageFactory, AuthenticationService authentication)
         {
             _mainPageFactory = mainPageFactory;
             _authentication = authentication;

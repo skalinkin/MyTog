@@ -1,59 +1,47 @@
-﻿using System.Diagnostics;
-using Auth0.OidcClient;
+﻿using Auth0.OidcClient;
 using Kalinkin.MyTog.Mobile;
-using Kalinkin.MyTog.Mobile.SQLiteComponent;
+using Kalinkin.MyTog.Mobile.Domain;
 using TinyMessenger;
 
 namespace MyTog.Mobile.Droid.Auth0Component
 {
-    public class Auth0AuthenticationService : IAuthenticationService
+    public class Auth0AuthenticationService : AuthenticationService
     {
-        private readonly MyTogDatabase _database;
-        private readonly ITinyMessengerHub _messenger;
-
-        public Auth0AuthenticationService(MyTogDatabase database, ITinyMessengerHub messenger)
+        public Auth0AuthenticationService(ITinyMessengerHub messenger)
         {
-            _database = database;
             _messenger = messenger;
         }
 
-        public async void AuthenticateAsync()
+        protected override void Login()
         {
-            _messenger.Publish(new StartUpStatus {Sender = this, StatusText = "Authenticating..."});
-            var records = await _database.GetItemsAsync();
-
-            if (records.Count == 0)
+            var client = new Auth0Client(new Auth0ClientOptions
             {
-                var client = new Auth0Client(new Auth0ClientOptions
-                {
-                    Domain = "mytog.auth0.com",
-                    ClientId = "yKKtP1bkVMtbVXO9dO2y63ShQBirl5ZN"
-                });
-                var loginResult = await client.LoginAsync();
-                if (loginResult.IsError)
-                {
-                    Debug.Print($"An error occurred during login: {loginResult.Error}");
-                }
-                else
-                {
-                    _messenger.Publish(new StartUpStatus {Sender = this, StatusText = "User Authenticated."});
-                    Debug.WriteLine($"id_token: {loginResult.IdentityToken}");
-                    Debug.WriteLine($"access_token: {loginResult.AccessToken}");
-                    Debug.WriteLine($"name: {loginResult.User.FindFirst(c => c.Type == "name")?.Value}");
-                    Debug.WriteLine($"email: {loginResult.User.FindFirst(c => c.Type == "email")?.Value}");
-                    foreach (var claim in loginResult.User.Claims)
-                    {
-                        Debug.WriteLine($"{claim.Type} = {claim.Value}");
-                    }
+                Domain = "mytog.auth0.com",
+                ClientId = "yKKtP1bkVMtbVXO9dO2y63ShQBirl5ZN"
+            });
 
-                    var loginResultRecord = new LoginResult
-                    {
-                        AccessToken = loginResult.AccessToken, IdentityToken = loginResult.IdentityToken
-                    };
-                    await _database.SaveItemAsync(loginResultRecord);
-                }
+            var result = client.LoginAsync().Result;
+
+            if (result.IsError)
+            {
+                _messenger.Publish(new AuthenticationFailed {Error = result.Error});
             }
 
+            var entity = new LoginResult();
+
+            //entity. = result.AccessToken;
+            //entity. = result.AccessTokenExpiration;
+            //entity. = result.AuthenticationTime;
+            //entity. = result.IdentityToken;
+            //entity. = result.RefreshToken;
+            //entity. = result.User.Identity.IsAuthenticated;
+            //entity. = result.User.Identity.Name;
+            //entity. = result.User.Identity.AuthenticationType;
+            //entity. = result.User.;
+            //entity. = result.AccessToken;
+            //entity. = result.AccessToken;
+            //entity. = result.AccessToken;
+            //entity. = result.AccessToken;
             _messenger.Publish(new AuthenticationSuccessful());
         }
     }

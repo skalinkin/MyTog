@@ -6,13 +6,13 @@ namespace Kalinkin.MyTog.Mobile
 {
     internal class DefaultApplicationMode : IApplicationMode
     {
-        private readonly IAuthenticationService _authentication;
+        private readonly AuthenticationService _authentication;
         private readonly Func<MainPageDetail> _createDetail;
         private readonly Func<MainPageMaster> _createMaster;
         private readonly Func<MainPage> _mainPageFactory;
         private App _application;
 
-        public DefaultApplicationMode(Func<MainPage> mainPageFactory, IAuthenticationService authentication,
+        public DefaultApplicationMode(Func<MainPage> mainPageFactory, AuthenticationService authentication,
             Func<MainPageMaster> createMaster, Func<MainPageDetail> createDetail)
         {
             _mainPageFactory = mainPageFactory;

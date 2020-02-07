@@ -1,6 +1,6 @@
 ﻿using TinyMessenger;
 
-namespace MyTog.Mobile.Droid.Auth0Component
+namespace Kalinkin.MyTog.Mobile.Domain
 {
     public class AuthenticationSuccessful:ITinyMessage
     {

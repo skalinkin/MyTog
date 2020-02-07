@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Kalinkin.MyTog.Mobile.Domain;
 
 namespace Kalinkin.MyTog.Mobile
 {

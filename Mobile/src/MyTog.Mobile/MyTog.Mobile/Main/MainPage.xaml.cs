@@ -1,4 +1,5 @@
 ﻿using System;
+using Kalinkin.MyTog.Mobile.Domain;
 using TinyMessenger;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

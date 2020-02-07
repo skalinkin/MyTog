@@ -1,7 +1,6 @@
-﻿using System;
-using TinyMessenger;
+﻿using TinyMessenger;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.Domain
 {
     public class NavigateTo:ITinyMessage
     {

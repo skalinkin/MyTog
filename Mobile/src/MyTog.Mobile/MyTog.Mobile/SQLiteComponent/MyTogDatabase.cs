@@ -25,36 +25,36 @@ namespace Kalinkin.MyTog.Mobile.SQLiteComponent
         private async Task InitializeAsync()
         {
             if (!initialized)
-                if (Database.TableMappings.All(m => m.MappedType.Name != typeof(LoginResult).Name))
+                if (Database.TableMappings.All(m => m.MappedType.Name != typeof(LoginResultRecord).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(LoginResult)).ConfigureAwait(false);
+                    await Database.CreateTablesAsync(CreateFlags.None, typeof(LoginResultRecord)).ConfigureAwait(false);
                     initialized = true;
                 }
         }
 
-        public Task<List<LoginResult>> GetItemsAsync()
+        public Task<List<LoginResultRecord>> GetItemsAsync()
         {
-            return Database.Table<LoginResult>().ToListAsync();
+            return Database.Table<LoginResultRecord>().ToListAsync();
         }
 
-        public Task<List<LoginResult>> GetItemsNotDoneAsync()
+        public Task<List<LoginResultRecord>> GetItemsNotDoneAsync()
         {
-            return Database.QueryAsync<LoginResult>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
+            return Database.QueryAsync<LoginResultRecord>("SELECT * FROM [TodoItem] WHERE [Done] = 0");
         }
 
-        public Task<LoginResult> GetItemAsync(int id)
+        public Task<LoginResultRecord> GetItemAsync(int id)
         {
-            return Database.Table<LoginResult>().Where(i => i.ID == id).FirstOrDefaultAsync();
+            return Database.Table<LoginResultRecord>().Where(i => i.ID == id).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveItemAsync(LoginResult item)
+        public Task<int> SaveItemAsync(LoginResultRecord item)
         {
             if (item.ID != 0)
                 return Database.UpdateAsync(item);
             return Database.InsertAsync(item);
         }
 
-        public Task<int> DeleteItemAsync(LoginResult item)
+        public Task<int> DeleteItemAsync(LoginResultRecord item)
         {
             return Database.DeleteAsync(item);
         }

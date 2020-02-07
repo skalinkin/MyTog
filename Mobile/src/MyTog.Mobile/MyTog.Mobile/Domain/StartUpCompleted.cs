@@ -1,6 +1,6 @@
 ﻿using TinyMessenger;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.Domain
 {
     internal class StartUpCompleted : ITinyMessage
     {

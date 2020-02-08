@@ -6,19 +6,19 @@ namespace Kalinkin.MyTog.Mobile
 {
     public abstract class AuthenticationService
     {
-        protected MyTogDatabase _database;
         protected ITinyMessengerHub _hub;
+        private readonly IAccessTokenLifetimeQuery _query;
 
-        protected AuthenticationService(ITinyMessengerHub hub, MyTogDatabase database)
+        protected AuthenticationService(ITinyMessengerHub hub, IAccessTokenLifetimeQuery query)
         {
             _hub = hub;
-            _database = database;
+            _query = query;
         }
 
         public async void AuthenticateAsync()
         {
             _hub.Publish(new StartUpStatus {Sender = this, StatusText = "Authenticating..."});
-            var records = await _database.GetItemsAsync();
+            var records = await _query.GetItemsAsync();
 
             if (records.Count == 0)
             {

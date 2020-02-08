@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile
@@ -6,11 +7,13 @@ namespace Kalinkin.MyTog.Mobile
     public partial class App : Application
     {
         private IApplicationMode _currentMode;
+        private readonly IEnumerable<IApplicationService> _services;
 
-        public App(IApplicationMode initialMode)
+        public App(IApplicationMode initialMode, IEnumerable<IApplicationService> services)
         {
             InitializeComponent();
             _currentMode = initialMode;
+            _services = services;
             _currentMode.SetApplication(this);
         }
 

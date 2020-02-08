@@ -9,7 +9,8 @@ namespace Kalinkin.MyTog.Mobile.SQLiteComponent
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<MyTogDatabase>().SingleInstance();
+            builder.RegisterType<SqLiteAccessTokenLifetimeStore>().As<IAccessTokenLifetimeStore>();
+            builder.RegisterType<SqlLiteAccessTokenLifetimeQuery>().As<IAccessTokenLifetimeQuery>();
         }
     }
 }

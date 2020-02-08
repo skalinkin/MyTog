@@ -20,6 +20,7 @@ namespace Kalinkin.MyTog.Mobile
             builder.RegisterType<DefaultApplicationMode>();
             builder.RegisterType<PhotographerApplicationMode>();
             builder.RegisterType<StartingUpApplicationMode>().As<IApplicationMode>();
+            builder.RegisterType<AccessTokenLifetimeHandler>().As<IApplicationService>();
         }
     }
 }

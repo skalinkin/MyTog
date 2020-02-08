@@ -7,11 +7,17 @@ namespace Kalinkin.MyTog.Mobile
     public abstract class AuthenticationService
     {
         protected MyTogDatabase _database;
-        protected ITinyMessengerHub _messenger;
+        protected ITinyMessengerHub _hub;
+
+        protected AuthenticationService(ITinyMessengerHub hub, MyTogDatabase database)
+        {
+            _hub = hub;
+            _database = database;
+        }
 
         public async void AuthenticateAsync()
         {
-            _messenger.Publish(new StartUpStatus {Sender = this, StatusText = "Authenticating..."});
+            _hub.Publish(new StartUpStatus {Sender = this, StatusText = "Authenticating..."});
             var records = await _database.GetItemsAsync();
 
             if (records.Count == 0)
@@ -20,6 +26,12 @@ namespace Kalinkin.MyTog.Mobile
             }
         }
 
+        public void LogoutAsync()
+        {
+            Logout();
+        }
+
         protected abstract void Login();
+        protected abstract void Logout();
     }
 }

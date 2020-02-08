@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using System;
+using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile
 {
@@ -9,10 +10,11 @@ namespace Kalinkin.MyTog.Mobile
         public App(IApplicationMode initialMode)
         {
             InitializeComponent();
-            TransitionTo(initialMode);
+            _currentMode = initialMode;
+            _currentMode.SetApplication(this);
         }
 
-        public void TransitionTo(IApplicationMode mode)
+        public void SetMode(IApplicationMode mode)
         {
             _currentMode = mode;
             _currentMode.SetApplication(this);

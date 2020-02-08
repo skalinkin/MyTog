@@ -25,7 +25,7 @@ namespace Kalinkin.MyTog.Mobile.Main
                 return;
             }
 
-            var page = (Page) Activator.CreateInstance(obj.Target.TargetType);
+            var page = obj.Target.CreateTarget();
             page.Title = obj.Target.Title;
 
             Detail = new NavigationPage(page);

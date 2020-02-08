@@ -1,4 +1,5 @@
 ﻿using System;
+using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile
 {
@@ -7,5 +8,6 @@ namespace Kalinkin.MyTog.Mobile
         string Title { get; }
 
         Type TargetType { get; }
+        Page CreateTarget();
     }
 }

@@ -12,9 +12,10 @@ namespace Kalinkin.MyTog.Mobile.AccountComponent
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class AccountPage : ContentPage
     {
-        public AccountPage()
+        public AccountPage(AccountViewModel viewModel)
         {
             InitializeComponent();
+            BindingContext = viewModel;
         }
     }
 }

@@ -1,30 +1,32 @@
-﻿using Auth0.OidcClient;
+﻿using System;
+using Auth0.OidcClient;
+using IdentityModel.OidcClient.Browser;
 using Kalinkin.MyTog.Mobile;
 using Kalinkin.MyTog.Mobile.Domain;
+using Kalinkin.MyTog.Mobile.SQLiteComponent;
 using TinyMessenger;
 
 namespace MyTog.Mobile.Droid.Auth0Component
 {
     public class Auth0AuthenticationService : AuthenticationService
     {
-        public Auth0AuthenticationService(ITinyMessengerHub messenger)
+        private readonly Func<Auth0Client> _createClient;
+
+        public Auth0AuthenticationService(ITinyMessengerHub hub, Func<Auth0Client> createClient, MyTogDatabase database)
+            : base(hub, database)
         {
-            _messenger = messenger;
+            _createClient = createClient;
         }
 
-        protected override void Login()
+        protected override async void Login()
         {
-            var client = new Auth0Client(new Auth0ClientOptions
-            {
-                Domain = "mytog.auth0.com",
-                ClientId = "yKKtP1bkVMtbVXO9dO2y63ShQBirl5ZN"
-            });
-
-            var result = client.LoginAsync().Result;
+            var client = _createClient();
+            var result = await client.LoginAsync();
 
             if (result.IsError)
             {
-                _messenger.Publish(new AuthenticationFailed {Error = result.Error});
+                _hub.Publish(new AuthenticationFailed {Error = result.Error});
+                return;
             }
 
             var entity = new LoginResult();
@@ -42,7 +44,18 @@ namespace MyTog.Mobile.Droid.Auth0Component
             //entity. = result.AccessToken;
             //entity. = result.AccessToken;
             //entity. = result.AccessToken;
-            _messenger.Publish(new AuthenticationSuccessful());
+            _hub.Publish(new AuthenticationSuccessful());
+        }
+
+        protected override async void Logout()
+        {
+            var client = _createClient();
+            var result = await client.LogoutAsync();
+
+            if (result == BrowserResultType.Success)
+            {
+                _hub.Publish(new LogoutSuccess());
+            }
         }
     }
 }

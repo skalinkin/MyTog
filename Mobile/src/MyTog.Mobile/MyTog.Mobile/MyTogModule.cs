@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
+using Kalinkin.MyTog.Mobile.PhotographerComponent;
 using Kalinkin.MyTog.Mobile.StartingUpComponent;
 using TinyMessenger;
 using Xamarin.Forms;
@@ -17,6 +18,7 @@ namespace Kalinkin.MyTog.Mobile
             builder.RegisterType<StartingUpViewModel>();
             builder.RegisterType<StartingUpPage>();
             builder.RegisterType<DefaultApplicationMode>();
+            builder.RegisterType<PhotographerApplicationMode>();
             builder.RegisterType<StartingUpApplicationMode>().As<IApplicationMode>();
         }
     }

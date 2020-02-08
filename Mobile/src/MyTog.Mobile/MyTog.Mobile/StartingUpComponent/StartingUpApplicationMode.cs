@@ -30,18 +30,18 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
         {
             _messenger.Publish(new StartUpStatus {Sender = this, StatusText = "Loading the application."});
             var mode = _createDefaultApplicationMode();
-            Device.BeginInvokeOnMainThread(() => _application.TransitionTo(mode));
+            Device.BeginInvokeOnMainThread(() => _application.SetMode(mode));
         }
 
         public void SetApplication(App application)
         {
             _application = application;
-            _application.MainPage = _pageFactory();
-            _authentication.AuthenticateAsync();
         }
 
         public void HandleOnStart()
         {
+            Device.BeginInvokeOnMainThread(() => _application.MainPage = _pageFactory());
+            _authentication.AuthenticateAsync();
         }
 
         public void HandleOnResume()

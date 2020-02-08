@@ -1,31 +1,30 @@
 ﻿using System;
 using Kalinkin.MyTog.Mobile.Domain;
 using Kalinkin.MyTog.Mobile.Main;
-using Kalinkin.MyTog.Mobile.PhotographerComponent;
 using TinyMessenger;
 using Xamarin.Forms;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.PhotographerComponent
 {
-    internal class DefaultApplicationMode : IApplicationMode
+    internal class PhotographerApplicationMode : IApplicationMode
     {
         private readonly AuthenticationService _authentication;
         private readonly Func<MainPageDetail> _createDetail;
         private readonly ITinyMessengerHub _hub;
-        private readonly Func<PhotographerApplicationMode> _createPhotogMode;
+        private readonly Func<DefaultApplicationMode> _createDefaultMode;
         private readonly Func<MainPageMaster> _createMaster;
         private readonly Func<MainPage> _mainPageFactory;
         private App _application;
 
-        public DefaultApplicationMode(Func<MainPage> mainPageFactory, AuthenticationService authentication,
-            Func<MainPageMaster> createMaster, Func<MainPageDetail> createDetail, ITinyMessengerHub hub, Func<PhotographerApplicationMode> createPhotogMode)
+        public PhotographerApplicationMode(Func<MainPage> mainPageFactory, AuthenticationService authentication,
+            Func<MainPageMaster> createMaster, Func<MainPageDetail> createDetail, ITinyMessengerHub hub, Func<DefaultApplicationMode> createDefaultMode)
         {
             _mainPageFactory = mainPageFactory;
             _authentication = authentication;
             _createMaster = createMaster;
             _createDetail = createDetail;
             _hub = hub;
-            _createPhotogMode = createPhotogMode;
+            _createDefaultMode = createDefaultMode;
 
             _hub.Subscribe<Logout>(OnLogout);
             _hub.Subscribe<LogoutSuccess>(OnLogoutSuccess);
@@ -33,7 +32,7 @@ namespace Kalinkin.MyTog.Mobile
 
         private void OnLogoutSuccess(LogoutSuccess obj)
         {
-            _application.SetMode(_createPhotogMode());
+            _application.SetMode(_createDefaultMode());
         }
 
         private void OnLogout(Logout obj)

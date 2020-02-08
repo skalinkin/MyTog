@@ -11,6 +11,7 @@ namespace Kalinkin.MyTog.Mobile.AccountComponent
         {
             builder.RegisterType<AccountMenuItem>().As<IMenuItem>();
             builder.RegisterType<AccountPage>();
+            builder.RegisterType<AccountViewModel>();
         }
     }
 }

@@ -10,6 +10,7 @@
             <Label Text="Account."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Button Text="Logout" Command="{Binding Logout}"></Button>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

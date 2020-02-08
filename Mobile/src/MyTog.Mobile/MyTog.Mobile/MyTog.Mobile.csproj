@@ -60,8 +60,4 @@
       <DependentUpon>StartingUpPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Auth0Component\" />
-  </ItemGroup>
 </Project>

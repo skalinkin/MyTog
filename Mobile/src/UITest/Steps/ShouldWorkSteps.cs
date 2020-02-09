@@ -1,7 +1,7 @@
 ﻿using TechTalk.SpecFlow;
 using Xamarin.UITest;
 
-namespace UITest.Steps
+namespace Kalinkin.MyTog.UITest.Steps
 {
     [Binding]
     public class ShouldWorkSteps

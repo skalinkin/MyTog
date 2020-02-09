@@ -2,7 +2,7 @@
 using TechTalk.SpecFlow;
 using Xamarin.UITest;
 
-namespace UITest.Specs
+namespace Kalinkin.MyTog.UITest.Specs
 {
     [TestFixture(Platform.Android)]
     public partial class ShouldWorkFeature

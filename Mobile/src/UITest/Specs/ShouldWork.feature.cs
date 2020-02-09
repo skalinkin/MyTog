@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace UITest.Specs
+namespace Kalinkin.MyTog.UITest.Specs
 {
     using TechTalk.SpecFlow;
     using System;

@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B8811881-E323-4C52-956E-64AE8C226D2F}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>UITest</RootNamespace>
+    <RootNamespace>Kalinkin.MyTog.UITest</RootNamespace>
     <AssemblyName>UITest</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
   </PropertyGroup>
@@ -38,8 +38,11 @@
     <PackageReference Include="SpecFlow.Tools.MsBuild.Generation">
       <Version>3.1.82</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.UITest" Version="3.0.3" />
-    <PackageReference Include="NUnit3TestAdapter" Version="3.13.0" />
+    <PackageReference Include="Xamarin.UITest" Version="3.0.6" />
+    <PackageReference Include="NUnit3TestAdapter" Version="3.16.1">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\ShouldWorkFeature.cs" />

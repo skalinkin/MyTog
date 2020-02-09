@@ -1,8 +1,6 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
-using Kalinkin.MyTog.Mobile;
-using MyTog.Mobile.Droid.Auth0Component;
 
 namespace MyTog.Mobile.Droid.Autofac
 {
@@ -11,7 +9,6 @@ namespace MyTog.Mobile.Droid.Autofac
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<Auth0AuthenticationService>().As<AuthenticationService>();
         }
     }
 }

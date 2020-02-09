@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
+using Kalinkin.MyTog.Mobile.DefaultModeComponent;
 using Kalinkin.MyTog.Mobile.PhotographerComponent;
 using Kalinkin.MyTog.Mobile.StartingUpComponent;
 using TinyMessenger;
@@ -19,6 +20,9 @@ namespace Kalinkin.MyTog.Mobile
             builder.RegisterType<StartingUpPage>();
             builder.RegisterType<DefaultApplicationMode>();
             builder.RegisterType<PhotographerApplicationMode>();
+            builder.RegisterType<SelectingModePage>();
+            builder.RegisterType<SelectingModeViewModel>();
+            builder.RegisterType<StartingUpApplicationMode>();
             builder.RegisterType<StartingUpApplicationMode>().As<IApplicationMode>();
             builder.RegisterType<AccessTokenLifetimeHandler>().As<IApplicationService>();
         }

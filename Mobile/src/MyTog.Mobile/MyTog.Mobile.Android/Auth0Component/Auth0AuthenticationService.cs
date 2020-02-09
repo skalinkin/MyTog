@@ -7,7 +7,7 @@ using TinyMessenger;
 
 namespace MyTog.Mobile.Droid.Auth0Component
 {
-    public class Auth0AuthenticationService : AuthenticationService
+    public class Auth0AuthenticationService : AuthenticationService, IApplicationService
     {
         private readonly Func<Auth0Client> _createClient;
 

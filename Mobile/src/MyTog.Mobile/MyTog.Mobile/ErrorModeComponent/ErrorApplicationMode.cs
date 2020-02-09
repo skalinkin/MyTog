@@ -1,19 +1,17 @@
 ﻿using System;
 using Kalinkin.MyTog.Mobile.Main;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.ErrorModeComponent
 {
     internal class ErrorApplicationMode : IApplicationMode
     {
         private readonly Func<MainPage> _mainPageFactory;
-        private readonly AuthenticationService _authentication;
+        private App _application;
 
-        public ErrorApplicationMode(Func<MainPage> mainPageFactory, AuthenticationService authentication)
+        public ErrorApplicationMode(Func<MainPage> mainPageFactory)
         {
             _mainPageFactory = mainPageFactory;
-            _authentication = authentication;
         }
-        private App _application;
 
         public void SetApplication(App application)
         {
@@ -23,17 +21,14 @@ namespace Kalinkin.MyTog.Mobile
 
         public void HandleOnStart()
         {
-            _authentication.AuthenticateAsync();
         }
 
         public void HandleOnResume()
         {
-            
         }
 
         public void HandleOnSleep()
         {
-            
         }
     }
 }

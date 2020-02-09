@@ -1,4 +1,6 @@
-﻿using Kalinkin.MyTog.Mobile.Domain;
+﻿using System;
+using System.Linq;
+using Kalinkin.MyTog.Mobile.Domain;
 using Kalinkin.MyTog.Mobile.SQLiteComponent;
 using TinyMessenger;
 
@@ -13,6 +15,15 @@ namespace Kalinkin.MyTog.Mobile
         {
             _hub = hub;
             _query = query;
+
+            _hub.Subscribe<StartAuthentication>(obj => AuthenticateAsync());
+            _hub.Subscribe<Logout>(obj => LogoutRoutine());
+        }
+
+        private void LogoutRoutine()
+        {
+            Logout();
+
         }
 
         public async void AuthenticateAsync()
@@ -24,11 +35,18 @@ namespace Kalinkin.MyTog.Mobile
             {
                 Login();
             }
-        }
-
-        public void LogoutAsync()
-        {
-            Logout();
+            else
+            {
+                var last = records.OrderByDescending(r => r.AuthenticationTime).First();
+                if (last.AccessTokenExpiration <= DateTime.Now )
+                {
+                    Login();
+                }
+                else
+                {
+                    _hub.Publish(new AuthenticationSuccessful());
+                }
+            }
         }
 
         protected abstract void Login();

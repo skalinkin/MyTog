@@ -1,44 +1,32 @@
 ﻿using System;
 using Kalinkin.MyTog.Mobile.Domain;
 using Kalinkin.MyTog.Mobile.Main;
-using Kalinkin.MyTog.Mobile.PhotographerComponent;
+using Kalinkin.MyTog.Mobile.StartingUpComponent;
 using TinyMessenger;
 using Xamarin.Forms;
 
-namespace Kalinkin.MyTog.Mobile
+namespace Kalinkin.MyTog.Mobile.DefaultModeComponent
 {
     internal class DefaultApplicationMode : IApplicationMode
     {
-        private readonly AuthenticationService _authentication;
         private readonly Func<MainPageDetail> _createDetail;
-        private readonly ITinyMessengerHub _hub;
-        private readonly Func<PhotographerApplicationMode> _createPhotogMode;
         private readonly Func<MainPageMaster> _createMaster;
+        private readonly Func<StartingUpApplicationMode> _createStartUpMode;
+        private readonly ITinyMessengerHub _hub;
         private readonly Func<MainPage> _mainPageFactory;
         private App _application;
 
-        public DefaultApplicationMode(Func<MainPage> mainPageFactory, AuthenticationService authentication,
-            Func<MainPageMaster> createMaster, Func<MainPageDetail> createDetail, ITinyMessengerHub hub, Func<PhotographerApplicationMode> createPhotogMode)
+        public DefaultApplicationMode(Func<MainPage> mainPageFactory,
+            Func<MainPageMaster> createMaster, Func<MainPageDetail> createDetail, ITinyMessengerHub hub,
+            Func<StartingUpApplicationMode> createStartUpMode)
         {
             _mainPageFactory = mainPageFactory;
-            _authentication = authentication;
             _createMaster = createMaster;
             _createDetail = createDetail;
             _hub = hub;
-            _createPhotogMode = createPhotogMode;
+            _createStartUpMode = createStartUpMode;
 
-            _hub.Subscribe<Logout>(OnLogout);
             _hub.Subscribe<LogoutSuccess>(OnLogoutSuccess);
-        }
-
-        private void OnLogoutSuccess(LogoutSuccess obj)
-        {
-            _application.SetMode(_createPhotogMode());
-        }
-
-        private void OnLogout(Logout obj)
-        {
-            _authentication.LogoutAsync();
         }
 
         public void SetApplication(App application)
@@ -60,6 +48,11 @@ namespace Kalinkin.MyTog.Mobile
 
         public void HandleOnSleep()
         {
+        }
+
+        private void OnLogoutSuccess(LogoutSuccess obj)
+        {
+            _application.SetMode(_createStartUpMode());
         }
     }
 }

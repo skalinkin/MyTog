@@ -11,7 +11,6 @@ namespace Kalinkin.MyTog.Mobile
         {
             InitializeComponent();
             BindingContext = viewModel;
-            viewModel.Start();
         }
     }
 }

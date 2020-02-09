@@ -37,5 +37,8 @@ namespace Kalinkin.MyTog.Mobile
         {
             _currentMode.HandleOnResume();
         }
+
+
+        public bool Started { get; set; }
     }
 }

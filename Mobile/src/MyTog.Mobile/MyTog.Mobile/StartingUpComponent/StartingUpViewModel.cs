@@ -1,25 +1,28 @@
 ﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Windows.Input;
 using Kalinkin.MyTog.Mobile.Annotations;
 using Kalinkin.MyTog.Mobile.Domain;
 using TinyMessenger;
+using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile.StartingUpComponent
 {
     public class StartingUpViewModel : INotifyPropertyChanged
     {
-        private readonly ITinyMessengerHub _messenger;
+        private readonly ITinyMessengerHub _hub;
         private string _message;
 
-        public StartingUpViewModel(ITinyMessengerHub messenger)
+        public StartingUpViewModel(ITinyMessengerHub hub)
         {
-            _messenger = messenger;
-            _messenger.Subscribe<StartUpStatus>(OnStartUpStatus);
+            Login = new Command(OnLogin);
+            _hub = hub;
+            _hub.Subscribe<StartUpStatus>(OnStartUpStatus);
         }
 
-        private void OnStartUpStatus(StartUpStatus obj)
+        private void OnLogin()
         {
-            Message = obj.StatusText;
+            _hub.Publish(new StartAuthentication());
         }
 
         public string Message
@@ -27,7 +30,11 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
             get => _message;
             set
             {
-                if (value == _message) return;
+                if (value == _message)
+                {
+                    return;
+                }
+
                 _message = value;
                 OnPropertyChanged(nameof(Message));
             }
@@ -35,15 +42,17 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private void OnStartUpStatus(StartUpStatus obj)
+        {
+            Device.BeginInvokeOnMainThread(() => { Message = obj.StatusText; });
+        }
+
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
-        public void Start()
-        {
-            Message = "Initializing...";
-        }
+        public ICommand Login { get; set; }
     }
 }

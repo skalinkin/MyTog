@@ -2,6 +2,7 @@
 using Kalinkin.MyTog.Mobile.Domain;
 using Kalinkin.MyTog.Mobile.PhotographerComponent;
 using TinyMessenger;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile.StartingUpComponent
@@ -32,12 +33,25 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
         public void SetApplication(App application)
         {
             _application = application;
-            Device.BeginInvokeOnMainThread(() => _application.MainPage = _pageFactory());
-            _hub.Publish(new StartAuthentication());
+            if (_application.Started)
+            {
+                HandleOnStart();
+            }
         }
 
         public void HandleOnStart()
         {
+            Func<Page> action = () => _application.MainPage = _pageFactory();
+            if (MainThread.IsMainThread)
+            {
+                action();
+            }
+            else
+            {
+                Device.InvokeOnMainThreadAsync(action).Wait();
+            }
+
+            _application.Started = true;
         }
 
         public void HandleOnResume()

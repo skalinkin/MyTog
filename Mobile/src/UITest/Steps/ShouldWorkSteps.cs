@@ -6,7 +6,6 @@ namespace Kalinkin.MyTog.UITest.Steps
     [Binding]
     public class ShouldWorkSteps
     {
-        readonly IApp app;
         [Given(@"Application lunched")]
         public void GivenApplicationLunched()
         {
@@ -15,6 +14,7 @@ namespace Kalinkin.MyTog.UITest.Steps
         [Then(@"No errors")]
         public void ThenNoErrors()
         {
+            
         }
     }
 }

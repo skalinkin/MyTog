@@ -1,24 +1,31 @@
 ﻿using System;
-using Kalinkin.MyTog.Mobile.Domain;
+using System.Linq;
+using System.Threading.Tasks;
+using TinyMessenger;
 
 namespace Kalinkin.MyTog.Mobile
 {
-    internal class CurrentUserService
+    public class CurrentUserService : IApplicationService
     {
-        private readonly Func<IUserQuery> _queryFactory;
+        private readonly ITinyMessengerHub _hub;
+        private readonly IAccessTokenLifetimeStore _store;
 
-        public CurrentUserService(Func<IUserQuery> queryFactory)
+        public CurrentUserService(ITinyMessengerHub hub, IAccessTokenLifetimeStore store)
         {
-            _queryFactory = queryFactory;
+            _hub = hub;
+            _store = store;
         }
 
-        public User GetCurrentUser()
+        public async Task<bool> IsUserNeedAuthentication()
         {
-            return _queryFactory().Get();
-        }
-
-        public void SetCurrentUser(User user)
-        {
+            var tokens = await _store.GetAllItems();
+            if (!tokens.Any())
+            {
+                return true;
+            }
+            var lastToken = tokens.OrderByDescending(i => i.AuthenticationTime).First();
+            var now = DateTime.Now;
+            return lastToken.AccessTokenExpiration < now;
         }
     }
 }

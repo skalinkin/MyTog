@@ -4,11 +4,11 @@ using Kalinkin.MyTog.Mobile.Domain;
 
 namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
-    internal class SqlLiteAccessTokenLifetimeQuery : IAccessTokenLifetimeQuery
+    internal class SQLiteAccessTokenLifetimeQuery : IAccessTokenLifetimeQuery
     {
         private readonly IAccessTokenLifetimeStore _store;
 
-        public SqlLiteAccessTokenLifetimeQuery(IAccessTokenLifetimeStore store)
+        public SQLiteAccessTokenLifetimeQuery(IAccessTokenLifetimeStore store)
         {
             _store = store;
         }

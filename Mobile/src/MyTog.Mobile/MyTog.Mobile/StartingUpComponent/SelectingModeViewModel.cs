@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Kalinkin.MyTog.Mobile.Annotations;
+using Kalinkin.MyTog.Mobile.Domain;
 using TinyMessenger;
 using Xamarin.Forms;
 
@@ -20,7 +21,7 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
 
         private void OnAmATog()
         {
-            _hub.Publish(new LunchPhotographerMode());
+            _hub.Publish(new LunchPhotographerModeCommand());
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

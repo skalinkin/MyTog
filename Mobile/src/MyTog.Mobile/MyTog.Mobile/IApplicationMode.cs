@@ -2,7 +2,7 @@
 {
     public interface IApplicationMode
     {
-        void SetApplication(App application);
+        void SetApplication(App App);
         void HandleOnStart();
         void HandleOnResume();
         void HandleOnSleep();

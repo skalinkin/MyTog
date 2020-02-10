@@ -17,18 +17,21 @@ namespace Kalinkin.MyTog.Mobile
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<TinyMessengerHub>().AsImplementedInterfaces().SingleInstance();
-            builder.RegisterType<App>().As<Application>();
+            builder.RegisterType<App>().As<Application>().SingleInstance();
             builder.RegisterType<StartingUpViewModel>();
             builder.RegisterType<StartingUpPage>();
             builder.RegisterType<DefaultApplicationMode>();
             builder.RegisterType<PhotographerApplicationMode>();
             builder.RegisterType<SelectingModePage>();
             builder.RegisterType<SelectingModeViewModel>();
-            builder.RegisterType<StartingUpApplicationMode>();
-            builder.RegisterType<StartingUpApplicationMode>().As<IApplicationMode>();
-            builder.RegisterType<AccessTokenLifetimeHandler>().As<IApplicationService>();
+            builder.RegisterType<StartingUpApplicationMode>().AsSelf().As<IApplicationMode>();
+            builder.RegisterType<CurrentUserService>().AsSelf().As<IApplicationService>().SingleInstance();
+            builder.RegisterType<AuthenticationService>().AsSelf().As<IApplicationService>().SingleInstance();
+            builder.RegisterType<ClearCurrentAccountHandler>().AsSelf().As<IApplicationService>().SingleInstance();
+            builder.RegisterType<ApplicationModeController>().AsSelf().As<IApplicationService>().SingleInstance();
 
-            builder.Register(c => new MapperConfiguration(cfg => {
+            builder.Register(c => new MapperConfiguration(cfg =>
+            {
                 foreach (var profile in c.Resolve<IEnumerable<Profile>>())
                 {
                     cfg.AddProfile(profile);

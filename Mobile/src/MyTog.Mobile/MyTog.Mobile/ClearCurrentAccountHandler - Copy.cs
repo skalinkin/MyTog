@@ -3,20 +3,20 @@ using TinyMessenger;
 
 namespace Kalinkin.MyTog.Mobile
 {
-    internal class ClearCurrentAccountHandler : IApplicationService
+    internal class ClearCurrentApplicationModeHandler : IApplicationService
     {
         private readonly ITinyMessengerHub _hub;
         private readonly IApplicationModeStore _store;
 
-        public ClearCurrentAccountHandler(ITinyMessengerHub hub, IApplicationModeStore store)
+        public ClearCurrentApplicationModeHandler(ITinyMessengerHub hub, IApplicationModeStore store)
         {
             _hub = hub;
             _store = store;
 
-            _hub.Subscribe<ClearCurrentAccountCommand>(OnClearCurrentAccount);
+            _hub.Subscribe<ClearCurrentApplicationModeCommand>(ClearApplicationMode);
         }
 
-        private async void OnClearCurrentAccount(ClearCurrentAccountCommand obj)
+        private async void ClearApplicationMode(ClearCurrentApplicationModeCommand clearCurrentApplicationModeCommand)
         {
             var items = await _store.GetAllItems();
 

@@ -1,30 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using TinyMessenger;
 using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile
 {
     public partial class App : Application
     {
+        private readonly ITinyMessengerHub _hub;
+        private readonly IApplicationMode _initMode;
         private IApplicationMode _currentMode;
-        private readonly IEnumerable<IApplicationService> _services;
 
-        public App(IApplicationMode initialMode, IEnumerable<IApplicationService> services)
+        public App(ITinyMessengerHub hub, IApplicationMode initMode)
         {
+            _hub = hub;
+            _initMode = initMode;
             InitializeComponent();
-            _currentMode = initialMode;
-            _services = services;
-            _currentMode.SetApplication(this);
         }
+
+        public bool Started { get; set; }
 
         public void SetMode(IApplicationMode mode)
         {
             _currentMode = mode;
-            _currentMode.SetApplication(this);
         }
 
         protected override void OnStart()
         {
+            _currentMode = _initMode;
+            _currentMode.SetApplication(this);
             _currentMode.HandleOnStart();
         }
 
@@ -37,8 +39,5 @@ namespace Kalinkin.MyTog.Mobile
         {
             _currentMode.HandleOnResume();
         }
-
-
-        public bool Started { get; set; }
     }
 }

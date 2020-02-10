@@ -5,24 +5,36 @@ using TinyMessenger;
 
 namespace Kalinkin.MyTog.Mobile
 {
-    public abstract class AuthenticationService
+    public class AuthenticationService : IApplicationService
     {
+        private readonly IPlatformAuthentication _platformAuthentication;
         private readonly IAccessTokenLifetimeQuery _query;
-        protected ITinyMessengerHub _hub;
+        private readonly IAccessTokenLifetimeStore _store;
+        protected ITinyMessengerHub Hub;
 
-        protected AuthenticationService(ITinyMessengerHub hub, IAccessTokenLifetimeQuery query)
+        public AuthenticationService(ITinyMessengerHub hub, IPlatformAuthentication platformAuthentication,
+            IAccessTokenLifetimeQuery query, IAccessTokenLifetimeStore store)
         {
-            _hub = hub;
+            Hub = hub;
+            _platformAuthentication = platformAuthentication;
             _query = query;
+            _store = store;
 
-            _hub.Subscribe<StartAuthenticationCommand>(obj => AuthenticateAsync());
-            _hub.Subscribe<LogoutCommand>(obj => LogoutRoutine());
+            Hub.Subscribe<StartAuthenticationCommand>(obj => AuthenticateAsync());
+            Hub.Subscribe<LogoutCommand>(obj => LogoutRoutine());
+            Hub.Subscribe<GenericTinyMessage<AccessTokenLifetime>>(OnMessage);
+        }
+
+        private async void OnMessage(GenericTinyMessage<AccessTokenLifetime> command)
+        {
+            await _store.AddItem(command.Content);
         }
 
         private void LogoutRoutine()
         {
-            Logout();
-            _hub.Publish(new ClearCurrentAccountCommand());
+            _platformAuthentication.Logout();
+            Hub.Publish(new ClearCurrentAccountCommand());
+            Hub.Publish(new ClearCurrentApplicationModeCommand());
         }
 
         public async void AuthenticateAsync()
@@ -31,23 +43,20 @@ namespace Kalinkin.MyTog.Mobile
 
             if (!records.Any())
             {
-                Login();
+                _platformAuthentication.Login();
             }
             else
             {
                 var last = records.OrderByDescending(r => r.AuthenticationTime).First();
                 if (last.AccessTokenExpiration <= DateTime.Now)
                 {
-                    Login();
+                    _platformAuthentication.Login();
                 }
                 else
                 {
-                    _hub.Publish(new AuthenticationSuccessfulEvent());
+                    Hub.Publish(new AuthenticationSuccessfulEvent());
                 }
             }
         }
-
-        protected abstract void Login();
-        protected abstract void Logout();
     }
 }

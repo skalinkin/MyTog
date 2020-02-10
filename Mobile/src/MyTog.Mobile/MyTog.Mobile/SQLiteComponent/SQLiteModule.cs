@@ -6,13 +6,14 @@ using AutoMapper;
 namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
     [Export(typeof(IModule))]
-    internal class SqlLiteModule : Module
+    internal class SQLiteModule : Module
     {
         protected override void Load(ContainerBuilder builder)
         {
             builder.RegisterType<SqLiteAccessTokenLifetimeStore>().As<IAccessTokenLifetimeStore>();
-            builder.RegisterType<SqlLiteAccessTokenLifetimeQuery>().As<IAccessTokenLifetimeQuery>();
-            builder.RegisterType<SqlLiteAutoMapperProfile>().As<Profile>();
+            builder.RegisterType<SQLiteAccessTokenLifetimeQuery>().As<IAccessTokenLifetimeQuery>();
+            builder.RegisterType<SQLiteApplicationModeStore>().As<IApplicationModeStore>();
+            builder.RegisterType<SQLiteAutoMapperProfile>().As<Profile>();
         }
     }
 }

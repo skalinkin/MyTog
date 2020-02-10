@@ -10,7 +10,8 @@
             <Label x:Name="Message" Text="{Binding Message}"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-                <Button Text="Login" Command="{Binding Login}"></Button>
+                <Button Text="Login" Command="{Binding Login}" IsEnabled="{Binding CanLogin}"></Button>
+            <ActivityIndicator VerticalOptions="Center" IsVisible="{Binding IsBusy}" IsRunning="{Binding IsBusy}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

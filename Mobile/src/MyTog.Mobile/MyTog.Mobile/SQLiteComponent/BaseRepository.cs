@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
@@ -8,14 +9,13 @@ using SQLite;
 
 namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
-    public class BaseRepository<TEntity,TRecord> : IRepository<TEntity> where TRecord : class, new()
+    public class BaseRepository<TEntity, TRecord> : IRepository<TEntity> where TRecord : class, new()
     {
-        private readonly IMapper _mapper;
-
         private static readonly Lazy<SQLiteAsyncConnection> lazyInitializer =
             new Lazy<SQLiteAsyncConnection>(() => new SQLiteAsyncConnection(Constants.DatabasePath, Constants.Flags));
 
         private static bool _initialized;
+        private readonly IMapper _mapper;
 
         public BaseRepository(IMapper mapper)
         {
@@ -28,7 +28,16 @@ namespace Kalinkin.MyTog.Mobile.SQLiteComponent
         public async Task<bool> AddItem(TEntity item)
         {
             var record = _mapper.Map<TRecord>(item);
-            return IsSuccess(await Database.InsertAsync(record));
+            try
+            {
+                var result = await Database.InsertAsync(record);
+                return IsSuccess(result);
+            }
+            catch (ExecutionEngineException exception)
+            {
+                Debug.Assert(false);
+                throw;
+            }
         }
 
         public async Task<bool> DeleteItem(TEntity item)
@@ -39,7 +48,7 @@ namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 
         public async Task<IEnumerable<TEntity>> FindItems(Expression<Func<TEntity, bool>> predicate)
         {
-            var converter = new ExpressionConverter<TEntity,TRecord>();
+            var converter = new ExpressionConverter<TEntity, TRecord>();
             var recordPredicate = converter.Convert(predicate);
             var records = await Database.Table<TRecord>().Where(recordPredicate).ToListAsync();
             return _mapper.Map<List<TEntity>>(records);
@@ -47,8 +56,9 @@ namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 
         public async Task<IEnumerable<TEntity>> GetAllItems()
         {
-            var records = await Database.Table<TRecord>().ToListAsync();
-            return _mapper.Map<List<TEntity>>(records);
+            var records = Database.Table<TRecord>().ToListAsync().Result;
+            var allItems = _mapper.Map<List<TEntity>>(records);
+            return allItems;
         }
 
         public async Task<TEntity> GetItem(string pk)

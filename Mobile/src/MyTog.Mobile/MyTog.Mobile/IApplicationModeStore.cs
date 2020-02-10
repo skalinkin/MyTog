@@ -2,8 +2,7 @@
 
 namespace Kalinkin.MyTog.Mobile
 {
-    internal interface IUserQuery
+    public interface IApplicationModeStore : IRepository<ApplicationMode>
     {
-        User Get();
     }
 }

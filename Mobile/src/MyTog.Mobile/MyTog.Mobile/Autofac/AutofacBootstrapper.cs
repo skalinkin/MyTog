@@ -36,10 +36,9 @@ namespace Kalinkin.MyTog.Mobile.Autofac
             _container = builder.Build();
         }
 
-        public Application GetApplication()
+        public T Resolve<T>()
         {
-            var app = _container.Resolve<Application>();
-            return app;
+            return _container.Resolve<T>();
         }
     }
 }

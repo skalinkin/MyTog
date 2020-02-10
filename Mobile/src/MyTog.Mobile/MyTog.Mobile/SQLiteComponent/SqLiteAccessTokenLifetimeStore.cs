@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq.Expressions;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
 using Kalinkin.MyTog.Mobile.Domain;
 
 namespace Kalinkin.MyTog.Mobile.SQLiteComponent

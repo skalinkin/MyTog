@@ -7,18 +7,19 @@ using TinyMessenger;
 
 namespace MyTog.Mobile.Droid.Auth0Component
 {
-    public class Auth0AuthenticationService : AuthenticationService, IApplicationService
+    public class Auth0AuthenticationService : IPlatformAuthentication
     {
         private readonly Func<Auth0Client> _createClient;
+        private readonly ITinyMessengerHub _hub;
 
         public Auth0AuthenticationService(ITinyMessengerHub hub, Func<Auth0Client> createClient,
             IAccessTokenLifetimeQuery query)
-            : base(hub, query)
         {
+            _hub = hub;
             _createClient = createClient;
         }
 
-        protected override async void Login()
+        public async void Login()
         {
             var client = _createClient();
             var result = await client.LoginAsync();
@@ -47,7 +48,7 @@ namespace MyTog.Mobile.Droid.Auth0Component
             _hub.Publish(new AuthenticationSuccessfulEvent());
         }
 
-        protected override async void Logout()
+        public async void Logout()
         {
             var client = _createClient();
             var result = await client.LogoutAsync();

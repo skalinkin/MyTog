@@ -1,13 +1,16 @@
-﻿using System.Reflection;
+﻿using System.Collections.Generic;
+using System.Reflection;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
 using Android.OS;
 using Android.Runtime;
 using Auth0.OidcClient;
+using Kalinkin.MyTog.Mobile;
 using Kalinkin.MyTog.Mobile.Autofac;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
+using Application = Xamarin.Forms.Application;
 using Platform = Xamarin.Essentials.Platform;
 
 namespace MyTog.Mobile.Droid
@@ -23,6 +26,8 @@ namespace MyTog.Mobile.Droid
         DataPathPrefix = "/android/com.kalinkin.mytog.mobile/callback")]
     public class MainActivity : FormsAppCompatActivity
     {
+        private IEnumerable<IApplicationService> _services;
+
         protected override void OnCreate(Bundle savedInstanceState)
         {
             TabLayoutResource = Resource.Layout.Tabbar;
@@ -39,7 +44,8 @@ namespace MyTog.Mobile.Droid
             bootstrapper.AddAssembly(Assembly.GetExecutingAssembly());
             bootstrapper.MakeContainer();
 
-            var application = bootstrapper.GetApplication();
+            _services = bootstrapper.Resolve<IEnumerable<IApplicationService>>();
+            var application = bootstrapper.Resolve<Application>();
             LoadApplication(application);
         }
 

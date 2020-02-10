@@ -2,9 +2,8 @@
 
 namespace Kalinkin.MyTog.Mobile.Domain
 {
-    public class AuthenticationFailed:ITinyMessage
+    internal class ClearCurrentAccountCommand:ITinyMessage
     {
         public object Sender { get; }
-        public string Error { get; set; }
     }
 }

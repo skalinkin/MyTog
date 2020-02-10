@@ -1,6 +1,8 @@
-﻿using System.ComponentModel.Composition;
+﻿using System.Collections.Generic;
+using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
+using AutoMapper;
 using Kalinkin.MyTog.Mobile.DefaultModeComponent;
 using Kalinkin.MyTog.Mobile.PhotographerComponent;
 using Kalinkin.MyTog.Mobile.StartingUpComponent;
@@ -25,6 +27,17 @@ namespace Kalinkin.MyTog.Mobile
             builder.RegisterType<StartingUpApplicationMode>();
             builder.RegisterType<StartingUpApplicationMode>().As<IApplicationMode>();
             builder.RegisterType<AccessTokenLifetimeHandler>().As<IApplicationService>();
+
+            builder.Register(c => new MapperConfiguration(cfg => {
+                foreach (var profile in c.Resolve<IEnumerable<Profile>>())
+                {
+                    cfg.AddProfile(profile);
+                }
+            })).AsSelf().SingleInstance();
+
+            builder.Register(c => c.Resolve<MapperConfiguration>()
+                    .CreateMapper(c.Resolve))
+                .As<IMapper>();
         }
     }
 }

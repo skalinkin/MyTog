@@ -15,10 +15,10 @@ namespace Kalinkin.MyTog.Mobile.Main
         {
             _messenger = messenger;
             InitializeComponent();
-            _messenger.Subscribe<NavigateTo>(OnNavigateTo);
+            _messenger.Subscribe<NavigateToCommand>(OnNavigateTo);
         }
 
-        private void OnNavigateTo(NavigateTo obj)
+        private void OnNavigateTo(NavigateToCommand obj)
         {
             if (obj.Target == null)
             {

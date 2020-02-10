@@ -15,7 +15,7 @@ namespace Kalinkin.MyTog.Mobile.AccountComponent
         public AccountViewModel(ITinyMessengerHub hub)
         {
             _hub = hub;
-            Logout = new Command(()=> _hub.Publish(new Logout()));
+            Logout = new Command(()=> _hub.Publish(new LogoutCommand()));
         }
         public ICommand Logout { private set; get; }
 

@@ -26,7 +26,7 @@ namespace Kalinkin.MyTog.Mobile.DefaultModeComponent
             _hub = hub;
             _createStartUpMode = createStartUpMode;
 
-            _hub.Subscribe<LogoutSuccess>(OnLogoutSuccess);
+            _hub.Subscribe<LogoutSuccessEvent>(OnLogoutSuccess);
         }
 
         public void SetApplication(App application)
@@ -50,7 +50,7 @@ namespace Kalinkin.MyTog.Mobile.DefaultModeComponent
         {
         }
 
-        private void OnLogoutSuccess(LogoutSuccess obj)
+        private void OnLogoutSuccess(LogoutSuccessEvent obj)
         {
             _application.SetMode(_createStartUpMode());
         }

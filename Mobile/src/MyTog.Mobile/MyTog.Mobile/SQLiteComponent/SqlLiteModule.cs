@@ -1,6 +1,7 @@
 ﻿using System.ComponentModel.Composition;
 using Autofac;
 using Autofac.Core;
+using AutoMapper;
 
 namespace Kalinkin.MyTog.Mobile.SQLiteComponent
 {
@@ -11,6 +12,7 @@ namespace Kalinkin.MyTog.Mobile.SQLiteComponent
         {
             builder.RegisterType<SqLiteAccessTokenLifetimeStore>().As<IAccessTokenLifetimeStore>();
             builder.RegisterType<SqlLiteAccessTokenLifetimeQuery>().As<IAccessTokenLifetimeQuery>();
+            builder.RegisterType<SqlLiteAutoMapperProfile>().As<Profile>();
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Kalinkin.MyTog.Mobile
 
         private void OnMessage(GenericTinyMessage<AccessTokenLifetime> command)
         {
-            _store.SaveItemAsync(command.Content);
+            _store.AddItem(command.Content);
         }
     }
 }

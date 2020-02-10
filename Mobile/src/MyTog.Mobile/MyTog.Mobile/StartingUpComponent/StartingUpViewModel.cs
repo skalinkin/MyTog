@@ -17,12 +17,11 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
         {
             Login = new Command(OnLogin);
             _hub = hub;
-            _hub.Subscribe<StartUpStatus>(OnStartUpStatus);
         }
 
         private void OnLogin()
         {
-            _hub.Publish(new StartAuthentication());
+            _hub.Publish(new StartAuthenticationCommand());
         }
 
         public string Message
@@ -41,11 +40,6 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnStartUpStatus(StartUpStatus obj)
-        {
-            Device.BeginInvokeOnMainThread(() => { Message = obj.StatusText; });
-        }
 
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

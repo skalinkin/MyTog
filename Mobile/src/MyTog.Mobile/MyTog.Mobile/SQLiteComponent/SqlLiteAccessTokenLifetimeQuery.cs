@@ -13,9 +13,9 @@ namespace Kalinkin.MyTog.Mobile.SQLiteComponent
             _store = store;
         }
 
-        public Task<List<AccessTokenLifetime>> GetItemsAsync()
+        public Task<IEnumerable<AccessTokenLifetime>> GetItemsAsync()
         {
-            return _store.GetItemsAsync();
+            return _store.GetAllItems();
         }
     }
 }

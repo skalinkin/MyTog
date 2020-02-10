@@ -6,6 +6,6 @@ namespace Kalinkin.MyTog.Mobile
 {
     public interface IAccessTokenLifetimeQuery
     {
-        Task<List<AccessTokenLifetime>> GetItemsAsync();
+        Task<IEnumerable<AccessTokenLifetime>> GetItemsAsync();
     }
 }

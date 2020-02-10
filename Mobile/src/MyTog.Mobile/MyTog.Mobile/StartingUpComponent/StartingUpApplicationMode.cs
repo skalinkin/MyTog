@@ -25,8 +25,8 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
             _createPhotographerApplicationMode = createPhotographerApplicationMode;
             _createSelectModePage = createSelectModePage;
 
-            _hub.Subscribe<StartUpCompleted>(OnStartUpCompleted);
-            _hub.Subscribe<AuthenticationSuccessful>(OnAuthenticationSuccessful);
+            _hub.Subscribe<StartUpCompletedEvent>(OnStartUpCompleted);
+            _hub.Subscribe<AuthenticationSuccessfulEvent>(OnAuthenticationSuccessful);
             _hub.Subscribe<LunchPhotographerMode>(OnLunchPhotographerMode);
         }
 
@@ -76,13 +76,24 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
             }
         }
 
-        private void OnAuthenticationSuccessful(AuthenticationSuccessful obj)
+        private void OnAuthenticationSuccessful(AuthenticationSuccessfulEvent obj)
         {
-            _hub.Publish(new StartUpStatus {Sender = this, StatusText = "Loading the application."});
-            Device.BeginInvokeOnMainThread(() => _application.MainPage = _createSelectModePage());
+            void Action()
+            {
+                _application.MainPage = _createSelectModePage();
+            }
+
+            if (MainThread.IsMainThread)
+            {
+                Action();
+            }
+            else
+            {
+                Device.BeginInvokeOnMainThread(Action);
+            }
         }
 
-        private void OnStartUpCompleted(StartUpCompleted obj)
+        private void OnStartUpCompleted(StartUpCompletedEvent obj)
         {
         }
     }

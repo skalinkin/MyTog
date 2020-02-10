@@ -33,7 +33,7 @@ namespace Kalinkin.MyTog.Mobile.Main
                 _selectedItem = value;
 
                 OnPropertyChanged(nameof(SelectedItem));
-                _messenger.Publish(new NavigateTo {Sender = this, Target = _selectedItem});
+                _messenger.Publish(new NavigateToCommand {Sender = this, Target = _selectedItem});
             }
         }
 

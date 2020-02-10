@@ -10,7 +10,7 @@ namespace Kalinkin.MyTog.UITest
             {
                 return ConfigureApp.Android
                     .ApkFile(
-                        @"C:\Users\SK\AppData\Local\Xamarin\Mono for Android\Archives\2020-02-09\MyTog.Mobile.Android 2-09-20 12.16 PM.apkarchive\com.kalinkin.mytog.mobile.apk")
+                        @"C:\Users\SK\AppData\Local\Xamarin\Mono for Android\Archives\2020-02-09\MyTog.Mobile.Android 2-09-20 4.16 PM.apkarchive\com.kalinkin.mytog.mobile.apk")
                     .StartApp();
             }
 

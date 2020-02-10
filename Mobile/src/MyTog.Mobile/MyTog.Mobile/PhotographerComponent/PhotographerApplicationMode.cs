@@ -25,7 +25,7 @@ namespace Kalinkin.MyTog.Mobile.PhotographerComponent
             _createDetail = createDetail;
             _hub = hub;
 
-            _hub.Subscribe<LogoutSuccess>(m => _application.SetMode(createStartingUpMode()));
+            _hub.Subscribe<LogoutSuccessEvent>(m => _application.SetMode(createStartingUpMode()));
         }
 
         public void SetApplication(App application)

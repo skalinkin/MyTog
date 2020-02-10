@@ -2,7 +2,7 @@
 
 namespace Kalinkin.MyTog.Mobile.Domain
 {
-    internal class StartUpCompleted : ITinyMessage
+    internal class StartUpCompletedEvent : ITinyMessage
     {
         public object Sender { get; set; }
     }

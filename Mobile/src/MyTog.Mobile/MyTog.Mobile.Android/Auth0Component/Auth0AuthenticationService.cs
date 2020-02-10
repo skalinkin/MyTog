@@ -25,7 +25,7 @@ namespace MyTog.Mobile.Droid.Auth0Component
 
             if (result.IsError)
             {
-                _hub.Publish(new AuthenticationFailed {Error = result.Error});
+                _hub.Publish(new AuthenticationFailedEvent {Error = result.Error});
                 return;
             }
 
@@ -44,7 +44,7 @@ namespace MyTog.Mobile.Droid.Auth0Component
             //entity. = result.User.Identity.IsAuthenticated;
             //entity. = result.User.Identity.Name;
             //entity. = result.User.Identity.AuthenticationType;
-            _hub.Publish(new AuthenticationSuccessful());
+            _hub.Publish(new AuthenticationSuccessfulEvent());
         }
 
         protected override async void Logout()
@@ -54,7 +54,7 @@ namespace MyTog.Mobile.Droid.Auth0Component
 
             if (result == BrowserResultType.Success)
             {
-                _hub.Publish(new LogoutSuccess());
+                _hub.Publish(new LogoutSuccessEvent());
             }
         }
     }

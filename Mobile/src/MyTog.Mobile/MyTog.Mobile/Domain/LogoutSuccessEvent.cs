@@ -2,7 +2,7 @@
 
 namespace Kalinkin.MyTog.Mobile.Domain
 {
-    internal class Logout:ITinyMessage
+    public class LogoutSuccessEvent:ITinyMessage
     {
         public object Sender { get; }
     }

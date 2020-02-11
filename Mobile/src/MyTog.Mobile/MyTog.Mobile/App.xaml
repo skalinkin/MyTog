@@ -8,7 +8,8 @@
              x:Class="Kalinkin.MyTog.Mobile.App">
     <Application.MainPage>
         <ContentPage>
-            <Label FontSize="50" Text="My Tog." />
+            <Label HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="50"
+                   Text="My Tog Application" />
         </ContentPage>
     </Application.MainPage>
     <Application.Resources>

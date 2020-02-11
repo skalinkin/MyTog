@@ -6,9 +6,9 @@ namespace Kalinkin.MyTog.Mobile
     internal class ClearCurrentAccountHandler : IApplicationService
     {
         private readonly ITinyMessengerHub _hub;
-        private readonly IApplicationModeStore _store;
+        private readonly IAccessTokenLifetimeStore _store;
 
-        public ClearCurrentAccountHandler(ITinyMessengerHub hub, IApplicationModeStore store)
+        public ClearCurrentAccountHandler(ITinyMessengerHub hub, IAccessTokenLifetimeStore store)
         {
             _hub = hub;
             _store = store;

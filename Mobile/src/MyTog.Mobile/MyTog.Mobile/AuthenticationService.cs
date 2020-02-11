@@ -35,6 +35,7 @@ namespace Kalinkin.MyTog.Mobile
             _platformAuthentication.Logout();
             Hub.Publish(new ClearCurrentAccountCommand());
             Hub.Publish(new ClearCurrentApplicationModeCommand());
+            Hub.Publish(new LogoutSuccessEvent());
         }
 
         public async void AuthenticateAsync()

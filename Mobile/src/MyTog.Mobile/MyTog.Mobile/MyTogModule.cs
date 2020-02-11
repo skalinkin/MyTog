@@ -24,10 +24,14 @@ namespace Kalinkin.MyTog.Mobile
             builder.RegisterType<PhotographerApplicationMode>();
             builder.RegisterType<SelectingModePage>();
             builder.RegisterType<SelectingModeViewModel>();
-            builder.RegisterType<StartingUpApplicationMode>().AsSelf().As<IApplicationMode>();
+            builder.RegisterType<StartingUpApplicationMode>();
+            builder.RegisterType<BootstrappingApplicationMode>().AsSelf().As<IApplicationMode>();
+            builder.RegisterType<InvalidatedApplicationMode>();
+            builder.RegisterType<UnAuthorizedApplicationMode>();
             builder.RegisterType<CurrentUserService>().AsSelf().As<IApplicationService>().SingleInstance();
             builder.RegisterType<AuthenticationService>().AsSelf().As<IApplicationService>().SingleInstance();
             builder.RegisterType<ClearCurrentAccountHandler>().AsSelf().As<IApplicationService>().SingleInstance();
+            builder.RegisterType<ClearCurrentApplicationModeHandler>().AsSelf().As<IApplicationService>().SingleInstance();
             builder.RegisterType<ApplicationModeController>().AsSelf().As<IApplicationService>().SingleInstance();
 
             builder.Register(c => new MapperConfiguration(cfg =>

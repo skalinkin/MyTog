@@ -52,11 +52,6 @@ namespace MyTog.Mobile.Droid.Auth0Component
         {
             var client = _createClient();
             var result = await client.LogoutAsync();
-
-            if (result == BrowserResultType.Success)
-            {
-                _hub.Publish(new LogoutSuccessEvent());
-            }
         }
     }
 }

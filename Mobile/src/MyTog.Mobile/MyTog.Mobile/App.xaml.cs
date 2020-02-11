@@ -21,6 +21,7 @@ namespace Kalinkin.MyTog.Mobile
         public void SetMode(IApplicationMode mode)
         {
             _currentMode = mode;
+            _currentMode.SetApplication(this);
         }
 
         protected override void OnStart()

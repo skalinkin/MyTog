@@ -30,6 +30,7 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
 
         private void OnNeedTog()
         {
+
         }
 
         public ICommand AmATog { get; set; }

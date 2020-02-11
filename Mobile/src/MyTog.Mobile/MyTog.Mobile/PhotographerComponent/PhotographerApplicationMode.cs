@@ -26,8 +26,6 @@ namespace Kalinkin.MyTog.Mobile.PhotographerComponent
             _createDetail = createDetail;
             _hub = hub;
             _applicationModeStore = applicationModeStore;
-
-            _hub.Subscribe<LogoutSuccessEvent>(m => _application.SetMode(createStartingUpMode()));
         }
 
         public void SetApplication(App application)
@@ -36,7 +34,9 @@ namespace Kalinkin.MyTog.Mobile.PhotographerComponent
             var applicationMainPage = _mainPageFactory();
             applicationMainPage.Master = _createMaster();
             applicationMainPage.Detail = new NavigationPage(_createDetail());
-            _application.MainPage = applicationMainPage;
+            
+            _application.InsureMainThread( () =>_application.MainPage = applicationMainPage);
+            
             var typeName = GetType().Name;
             _applicationModeStore.AddItem(new ApplicationMode() {Mode = typeName, SetTime = DateTime.Now});
         }

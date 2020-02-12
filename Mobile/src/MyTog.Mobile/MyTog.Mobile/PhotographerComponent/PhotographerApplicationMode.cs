@@ -36,9 +36,6 @@ namespace Kalinkin.MyTog.Mobile.PhotographerComponent
             applicationMainPage.Detail = new NavigationPage(_createDetail());
             
             _application.InsureMainThread( () =>_application.MainPage = applicationMainPage);
-            
-            var typeName = GetType().Name;
-            _applicationModeStore.AddItem(new ApplicationMode() {Mode = typeName, SetTime = DateTime.Now});
         }
 
         public void HandleOnStart()

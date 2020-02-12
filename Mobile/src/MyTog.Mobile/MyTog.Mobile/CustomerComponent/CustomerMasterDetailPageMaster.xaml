@@ -4,7 +4,7 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Kalinkin.MyTog.Mobile.Main.MainPageMaster"
+             x:Class="Kalinkin.MyTog.Mobile.CustomerComponent.CustomerMasterDetailPageMaster"
              Title="Master">
   <StackLayout>
     <ListView x:Name="MenuItemsListView"
@@ -25,7 +25,6 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="10"/>
           </Grid.RowDefinitions>
-          <Image Source=""></Image>
           <Label
               Grid.Column="1"
               Grid.Row="2"

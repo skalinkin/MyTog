@@ -9,7 +9,7 @@ namespace Kalinkin.MyTog.Mobile.AccountComponent
     {
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<AccountMenuItem>().As<IMenuItem>();
+            builder.RegisterType<AccountMenuItem>().As<IMenuItem>().As<ICustomerMenuItem>();
             builder.RegisterType<AccountPage>();
             builder.RegisterType<AccountViewModel>();
         }

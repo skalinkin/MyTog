@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile.AccountComponent
 {
-    internal class AccountMenuItem : IMenuItem
+    internal class AccountMenuItem : IMenuItem, ICustomerMenuItem
     {
         private readonly Func<AccountPage> _createPage;
 
@@ -11,9 +11,9 @@ namespace Kalinkin.MyTog.Mobile.AccountComponent
         {
             _createPage = createPage;
         }
+
         public string Title => "Account";
 
-        public Type TargetType => typeof(AccountPage);
         public Page CreateTarget()
         {
             return _createPage();

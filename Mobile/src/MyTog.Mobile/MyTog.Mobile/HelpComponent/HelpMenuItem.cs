@@ -14,7 +14,6 @@ namespace Kalinkin.MyTog.Mobile.HelpComponent
 
         public string Title => "Help";
 
-        public Type TargetType => typeof(HelpPage);
         public Page CreateTarget()
         {
             return _createPage();

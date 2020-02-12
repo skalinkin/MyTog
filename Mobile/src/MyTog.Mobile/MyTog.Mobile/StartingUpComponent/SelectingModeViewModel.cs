@@ -30,7 +30,7 @@ namespace Kalinkin.MyTog.Mobile.StartingUpComponent
 
         private void OnNeedTog()
         {
-
+            _hub.Publish(new LunchCustomerModeCommand());
         }
 
         public ICommand AmATog { get; set; }

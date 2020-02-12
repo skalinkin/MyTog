@@ -1,4 +1,6 @@
-﻿using TinyMessenger;
+﻿using System;
+using Kalinkin.MyTog.Mobile.Domain;
+using TinyMessenger;
 using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile
@@ -7,12 +9,14 @@ namespace Kalinkin.MyTog.Mobile
     {
         private readonly ITinyMessengerHub _hub;
         private readonly IApplicationMode _initMode;
+        private readonly IApplicationModeStore _applicationModeStore;
         private IApplicationMode _currentMode;
 
-        public App(ITinyMessengerHub hub, IApplicationMode initMode)
+        public App(ITinyMessengerHub hub, IApplicationMode initMode, IApplicationModeStore applicationModeStore)
         {
             _hub = hub;
             _initMode = initMode;
+            _applicationModeStore = applicationModeStore;
             InitializeComponent();
         }
 
@@ -22,6 +26,8 @@ namespace Kalinkin.MyTog.Mobile
         {
             _currentMode = mode;
             _currentMode.SetApplication(this);
+            var typeName = _currentMode.GetType().Name;
+            _applicationModeStore.AddItem(new ApplicationMode() {Mode = typeName, SetTime = DateTime.Now});
         }
 
         protected override void OnStart()

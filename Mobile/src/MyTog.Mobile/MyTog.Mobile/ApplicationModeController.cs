@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Kalinkin.MyTog.Mobile.CustomerComponent;
 using Kalinkin.MyTog.Mobile.Domain;
 using Kalinkin.MyTog.Mobile.PhotographerComponent;
 using Kalinkin.MyTog.Mobile.StartingUpComponent;
@@ -19,13 +20,14 @@ namespace Kalinkin.MyTog.Mobile
         private readonly Func<UnAuthorizedApplicationMode> _createUnAuthorizedApplicationMode;
         private readonly CurrentUserService _currentUserService;
         private readonly ITinyMessengerHub _hub;
+        private readonly Func<CustomerApplicationMode> _createCustomerMode;
 
         public ApplicationModeController(ITinyMessengerHub hub, Application app,
             Func<PhotographerApplicationMode> createPhotographerMode, Func<StartingUpApplicationMode> createStartUpMode,
             Func<InvalidatedApplicationMode> createInValidatedApplicationMode,
             IApplicationModeStore applicationModeStore,
             Func<UnAuthorizedApplicationMode> createUnAuthorizedApplicationMode, AuthenticationService authentication,
-            CurrentUserService currentUserService)
+            CurrentUserService currentUserService, Func<CustomerApplicationMode> createCustomerMode)
         {
             _hub = hub;
             _createPhotographerMode = createPhotographerMode;
@@ -35,12 +37,19 @@ namespace Kalinkin.MyTog.Mobile
             _createUnAuthorizedApplicationMode = createUnAuthorizedApplicationMode;
             _authentication = authentication;
             _currentUserService = currentUserService;
+            _createCustomerMode = createCustomerMode;
             _app = (App) app;
 
             _hub.Subscribe<LunchPhotographerModeCommand>(OnLunchPhotographerMode);
+            _hub.Subscribe<LunchCustomerModeCommand>(OnLunchCustomerMode);
             _hub.Subscribe<LogoutSuccessEvent>(OnLogoutSuccess);
             _hub.Subscribe<ApplicationStartedEvent>(OnApplicationStarted);
             _hub.Subscribe<AuthenticationSuccessfulEvent>(OnAuthenticationSuccessful);
+        }
+
+        private void OnLunchCustomerMode(LunchCustomerModeCommand obj)
+        {
+            _app.SetMode(_createCustomerMode());
         }
 
 
@@ -75,6 +84,16 @@ namespace Kalinkin.MyTog.Mobile
                 if (lastMode.Mode == "PhotographerApplicationMode")
                 {
                     _app.SetMode(_createPhotographerMode());
+                }
+
+                if (lastMode.Mode == "CustomerApplicationMode")
+                {
+                    _app.SetMode(_createCustomerMode());
+                }
+
+                if (lastMode.Mode == "UnAuthorizedApplicationMode")
+                {
+                    _app.SetMode(_createUnAuthorizedApplicationMode());
                 }
             }
             else

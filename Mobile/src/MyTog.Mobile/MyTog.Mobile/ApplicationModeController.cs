@@ -85,13 +85,11 @@ namespace Kalinkin.MyTog.Mobile
                 {
                     _app.SetMode(_createPhotographerMode());
                 }
-
-                if (lastMode.Mode == "CustomerApplicationMode")
+                else if (lastMode.Mode == "CustomerApplicationMode")
                 {
                     _app.SetMode(_createCustomerMode());
                 }
-
-                if (lastMode.Mode == "UnAuthorizedApplicationMode")
+                else
                 {
                     _app.SetMode(_createUnAuthorizedApplicationMode());
                 }

@@ -12,7 +12,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="5.0.0" />
+    <PackageReference Include="Autofac" Version="5.1.0" />
     <PackageReference Include="AutoMapper" Version="9.0.0" />
     <PackageReference Include="sqlite-net-pcl" Version="1.6.292" />
     <PackageReference Include="System.ComponentModel.Composition" Version="4.7.0" />
@@ -35,7 +35,7 @@
     <EmbeddedResource Update="CustomerComponent\CustomerMasterDetailPageMaster.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="CustomerComponent\RequestAppointmentPage.xaml">
+    <EmbeddedResource Update="CustomerComponent\ScheduleAppointmentPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="DefaultModeComponent\DefaultModeMainPage.xaml">
@@ -70,6 +70,9 @@
   <ItemGroup>
     <Compile Update="AccountComponent\AccountPage.xaml.cs">
       <DependentUpon>AccountPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="CustomerComponent\ScheduleAppointmentPage.xaml.cs">
+      <DependentUpon>ScheduleAppointmentPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="StartingUpComponent\StartingUpPage.xaml.cs">
       <DependentUpon>StartingUpPage.xaml</DependentUpon>

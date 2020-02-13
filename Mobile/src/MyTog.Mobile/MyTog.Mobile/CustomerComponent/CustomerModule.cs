@@ -9,10 +9,12 @@ namespace Kalinkin.MyTog.Mobile.CustomerComponent
     {
         protected override void Load(ContainerBuilder builder)
         {
+            builder.RegisterType<ScheduleService>().As<IApplicationService>();
             builder.RegisterType<CustomerMasterDetailPageMasterViewModel>();
             builder.RegisterType<CustomerMasterDetailPageMaster>();
-            builder.RegisterType<RequestAppointmentMenuItem>().As<ICustomerMenuItem>();
-            builder.RegisterType<RequestAppointmentPage>();
+            builder.RegisterType<ScheduleAppointmentMenuItem>().As<ICustomerMenuItem>();
+            builder.RegisterType<ScheduleAppointmentViewModel>();
+            builder.RegisterType<ScheduleAppointmentPage>();
             builder.RegisterType<CustomerApplicationMode>();
             builder.RegisterType<CustomerMasterDetailPage>();
         }

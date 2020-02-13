@@ -3,11 +3,11 @@ using Xamarin.Forms;
 
 namespace Kalinkin.MyTog.Mobile.CustomerComponent
 {
-    internal class RequestAppointmentMenuItem : ICustomerMenuItem
+    internal class ScheduleAppointmentMenuItem : ICustomerMenuItem
     {
-        private readonly Func<RequestAppointmentPage> _createPage;
+        private readonly Func<ScheduleAppointmentPage> _createPage;
 
-        public RequestAppointmentMenuItem(Func<RequestAppointmentPage> createPage)
+        public ScheduleAppointmentMenuItem(Func<ScheduleAppointmentPage> createPage)
         {
             _createPage = createPage;
         }

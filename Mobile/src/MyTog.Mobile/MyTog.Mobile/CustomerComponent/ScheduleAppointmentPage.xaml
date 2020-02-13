@@ -4,12 +4,14 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="Kalinkin.MyTog.Mobile.CustomerComponent.RequestAppointmentPage">
+             x:Class="Kalinkin.MyTog.Mobile.CustomerComponent.ScheduleAppointmentPage">
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Welcome to Xamarin.Forms!"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <Editor Text="{Binding Message}"></Editor>
+            <Button Command="{Binding Submit}" Text="Request and appointment" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -19,6 +19,7 @@ namespace Kalinkin.MyTog.Mobile
             builder.RegisterType<TinyMessengerHub>().AsImplementedInterfaces().SingleInstance();
             builder.RegisterType<App>().As<Application>().SingleInstance();
             builder.RegisterType<StartingUpViewModel>();
+            builder.RegisterType<PingService>();
             builder.RegisterType<StartingUpPage>();
             builder.RegisterType<DefaultApplicationMode>();
             builder.RegisterType<PhotographerApplicationMode>();
